@@ -81,32 +81,7 @@ Before doing installation, understand below parameters:
     ```
 Choose on of the options below to install Nginx Plus ingress controller
     - Install KIC only without service
-    ```
-    helm install nginx-plus-kic oci://ghcr.io/nginx/charts/nginx-ingress \
-    --version 2.4.1 \
-    --set --set controller.image.repository=private-registry.nginx.com/nginx-ic/nginx-plus-ingress \
-    --set controller.image.tag=5.3.1 \
-    --set controller.nginxStatus.allowCidrs="0.0.0.0:0" \
-    --set controller.nginxplus=true \
-    --set controller.replicaCount=2 \
-    --set controller.serviceAccount.imagePullSecretName=regcred \
-    --set controller.mgmt.licenseTokenSecretName=license-token \
-    -n nginx-ingress
-    ```
     - Install KIC with service nodeport
-    ```
-    helm install nginx-plus-kic oci://ghcr.io/nginx/charts/nginx-ingress \
-    --version 2.4.1 \
-    --set controller.image.repository=private-registry.nginx.com/nginx-ic-nap/nginx-plus-ingress \
-    --set controller.image.tag=5.3.1 \
-    --set controller.nginxStatus.allowCidrs="0.0.0.0:0" \
-    --set controller.nginxplus=true \
-    --set controller.replicaCount=2 \
-    --set controller.serviceAccount.imagePullSecretName=regcred \
-    --set controller.mgmt.licenseTokenSecretName=license-token \
-    --set controller.service.type=NodePort \
-    -n nginx-ingress
-    ```
 7. Enable nginx live dashboard
     a. Add access-list to allow access to N+ live dashboard 
     b. Enable service to access live dashboard
