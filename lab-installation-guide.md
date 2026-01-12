@@ -1,11 +1,8 @@
-# A first-level heading
-## A second-level heading
-### A third-level heading
-
-#References
+# References
+- https://docs.nginx.com/nginx-ingress-controller/install/manifests/
 
 # Summary of step-by-step
-Global configuration
+1. Global configuration
 Git clone script from git
 Create namespace
 Deploy the backend apps and it's service
