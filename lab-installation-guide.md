@@ -45,7 +45,6 @@ kubectl create namespace nginx-ingress
     vi nginx-one-eval.jwt
     vi nginx-one-eval.crt
     vi nginx-one-eval.key
-    
     # Paste the value on each file creation
     ```
     
