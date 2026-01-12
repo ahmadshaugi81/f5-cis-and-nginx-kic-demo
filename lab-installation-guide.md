@@ -80,7 +80,7 @@ Before doing installation, understand below parameters:
     --set nginxAgent.endpointHost=agent.connect.nginx.com
     ```
 Choose on of the options below to install Nginx Plus ingress controller
-    a. Install KIC only without service
+    - Install KIC only without service
     ```
     helm install nginx-plus-kic oci://ghcr.io/nginx/charts/nginx-ingress \
     --version 2.4.1 \
@@ -93,7 +93,7 @@ Choose on of the options below to install Nginx Plus ingress controller
     --set controller.mgmt.licenseTokenSecretName=license-token \
     -n nginx-ingress
     ```
-    b. Install KIC with service nodeport
+    - Install KIC with service nodeport
     ```
     helm install nginx-plus-kic oci://ghcr.io/nginx/charts/nginx-ingress \
     --version 2.4.1 \
