@@ -80,10 +80,7 @@ kubectl create namespace nginx-ingress
         ```
 
 
-
-
-
-
+## Break Point
     Choose on of the options below to install Nginx Plus ingress controller
     Install KIC only without service
     helm install nginx-plus-kic oci://ghcr.io/nginx/charts/nginx-ingress \
