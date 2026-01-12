@@ -41,6 +41,7 @@ kubectl create namespace nginx-ingress
 
 # Installation Nginx+ Ingress Controller
     1. Create or upload Nginx Plus JWT license file, certificate, and key files. Paste the value on each file creation
+    
     ```
     vi nginx-one-eval.jwt
     vi nginx-one-eval.crt
