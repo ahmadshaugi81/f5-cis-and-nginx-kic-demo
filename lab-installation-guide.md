@@ -40,14 +40,12 @@ kubectl create namespace nginx-ingress
     ```
 
 # Installation Nginx+ Ingress Controller
-    1. Create or upload Nginx Plus JWT license file, certificate, and key files
+    1. Create or upload Nginx Plus JWT license file, certificate, and key files. Paste the value on each file creation
     ```
     vi nginx-one-eval.jwt
     vi nginx-one-eval.crt
     vi nginx-one-eval.key
-    # Paste the value on each file creation
     ```
-    
     2. Create Kubernetes secret to pull images from NGINX private registry
     ```
     kubectl create secret docker-registry regcred --docker-server=private-registry.nginx.com --docker-username=`cat nginx-one-eval.jwt` --docker-password=none -n nginx-ingress
@@ -80,6 +78,11 @@ kubectl create namespace nginx-ingress
         --set nginxAgent.dataplaneKeySecretName=<data_plane_key_secret_name> \
         --set nginxAgent.endpointHost=agent.connect.nginx.com
         ```
+
+
+
+
+
 
     Choose on of the options below to install Nginx Plus ingress controller
     Install KIC only without service
