@@ -80,8 +80,8 @@ Before doing installation, understand below parameters:
     --set nginxAgent.endpointHost=agent.connect.nginx.com
     ```
 Choose on of the options below to install Nginx Plus ingress controller
-    - Install KIC only without service
-    - Install KIC with service nodeport
+- Install KIC only without service
+- Install KIC with service nodeport
 7. Enable nginx live dashboard
     a. Add access-list to allow access to N+ live dashboard 
     b. Enable service to access live dashboard
