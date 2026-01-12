@@ -40,45 +40,45 @@ kubectl create namespace nginx-ingress
     ```
 
 # Installation Nginx+ Ingress Controller
-    1. Create or upload Nginx Plus JWT license file, certificate, and key files. Paste the value on each file creation
-    
+1. Create or upload Nginx Plus JWT license file, certificate, and key files. Paste the value on each file creation
+
+```
+vi nginx-one-eval.jwt
+vi nginx-one-eval.crt
+vi nginx-one-eval.key
+```
+2. Create Kubernetes secret to pull images from NGINX private registry
+```
+kubectl create secret docker-registry regcred --docker-server=private-registry.nginx.com --docker-username=`cat nginx-one-eval.jwt` --docker-password=none -n nginx-ingress
+```
+3. Create Kubernetes secret holding the NGINX Plus license
+```
+kubectl create secret generic license-token --from-file=license.jwt=nginx-one-eval.jwt --type=nginx.com/license -n nginx-ingress
+```
+4. Optional: Create secret for Nginx ONE data plane key to integrate control plane monitoring with Nginx ONE console
+```
+kubectl create secret generic dataplane-key \
+--from-literal=dataplane.key=<Your Dataplane Key> \
+-n <namespace>
+```
+5. Create core custom resources
+```
+kubectl apply -f https://raw.githubusercontent.com/nginx/kubernetes-ingress/v5.3.1/deploy/crds.yaml
+kubectl apply -f https://raw.githubusercontent.com/nginx/kubernetes-ingress/v5.3.1/deploy/crds-nap-waf.yaml
+```
+6. Install Nginx Plus KIC with Helm, choose one that suitable
+Before doing installation, understand below parameters:
+    - **controller.replicaCount**: use to define the number of KIC pods created
+    - **controller.nginxStatus.allowCidrs**: use to define list of IP address allowed to access N+ live dashboard
+    - **controller.service.type**: use to create service directly in single Helm command to exposed KIC (ex: ClusterIP or NodePort)
+    - To integrate with Nginx ONE console for monitoring purposed, add this to helm charts
     ```
-    vi nginx-one-eval.jwt
-    vi nginx-one-eval.crt
-    vi nginx-one-eval.key
+    --set controller.image.repository=myregistry.example.com/nginx-plus-ingress \
+    --set controller.nginxplus=true \
+    --set nginxAgent.enable=true \
+    --set nginxAgent.dataplaneKeySecretName=<data_plane_key_secret_name> \
+    --set nginxAgent.endpointHost=agent.connect.nginx.com
     ```
-    2. Create Kubernetes secret to pull images from NGINX private registry
-    ```
-    kubectl create secret docker-registry regcred --docker-server=private-registry.nginx.com --docker-username=`cat nginx-one-eval.jwt` --docker-password=none -n nginx-ingress
-    ```
-    3. Create Kubernetes secret holding the NGINX Plus license
-    ```
-    kubectl create secret generic license-token --from-file=license.jwt=nginx-one-eval.jwt --type=nginx.com/license -n nginx-ingress
-    ```
-    4. Optional: Create secret for Nginx ONE data plane key to integrate control plane monitoring with Nginx ONE console
-    ```
-    kubectl create secret generic dataplane-key \
-    --from-literal=dataplane.key=<Your Dataplane Key> \
-    -n <namespace>
-    ```
-    5. Create core custom resources
-    ```
-    kubectl apply -f https://raw.githubusercontent.com/nginx/kubernetes-ingress/v5.3.1/deploy/crds.yaml
-    kubectl apply -f https://raw.githubusercontent.com/nginx/kubernetes-ingress/v5.3.1/deploy/crds-nap-waf.yaml
-    ```
-    6. Install Nginx Plus KIC with Helm, choose one that suitable
-    Before doing installation, understand below parameters:
-        - **controller.replicaCount**: use to define the number of KIC pods created
-        - **controller.nginxStatus.allowCidrs**: use to define list of IP address allowed to access N+ live dashboard
-        - **controller.service.type**: use to create service directly in single Helm command to exposed KIC (ex: ClusterIP or NodePort)
-        - To integrate with Nginx ONE console for monitoring purposed, add this to helm charts
-        ```
-        --set controller.image.repository=myregistry.example.com/nginx-plus-ingress \
-        --set controller.nginxplus=true \
-        --set nginxAgent.enable=true \
-        --set nginxAgent.dataplaneKeySecretName=<data_plane_key_secret_name> \
-        --set nginxAgent.endpointHost=agent.connect.nginx.com
-        ```
 
 
 ## Break Point
