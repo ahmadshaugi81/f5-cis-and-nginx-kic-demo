@@ -22,3 +22,17 @@ git clone https://github.com/ahmadshaugi81/f5-cis-and-nginx-kic-demo.git
 ```
 kubectl create namespace nginx-ingress
 ```
+
+# Deploy backend apps and services
+1. Go to folder "b-deploy-backend-services"
+2. Deploy sample backend apps and it's services
+    - For service with ClusterIP 
+    ``` UNDER CONSTRUCTION ```
+    _ For service with ClusterIP and enable nodeportlocal annotations (specific for use case with CNI Antrea)
+    ```
+    kubectl -n nginx-ingress apply -f 2-demo-app-and-svc-nplocal.yaml
+    ```
+    - For service with NodePort
+    ```
+    kubectl -n nginx-ingress apply -f 3-demo-app-and-svc-nodeport.yaml
+    ```
