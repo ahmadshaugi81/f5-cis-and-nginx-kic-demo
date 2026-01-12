@@ -71,7 +71,7 @@ Before doing installation, understand below parameters:
     - **controller.replicaCount**: use to define the number of KIC pods created
     - **controller.nginxStatus.allowCidrs**: use to define list of IP address allowed to access N+ live dashboard
     - **controller.service.type**: use to create service directly in single Helm command to exposed KIC (ex: ClusterIP or NodePort)
-    - To integrate with Nginx ONE console for monitoring purposed, add this to helm charts
+    - To integrate with Nginx ONE console for monitoring purposed, add this to the helm charts:
     ```
     --set controller.image.repository=myregistry.example.com/nginx-plus-ingress \
     --set controller.nginxplus=true \
@@ -79,11 +79,9 @@ Before doing installation, understand below parameters:
     --set nginxAgent.dataplaneKeySecretName=<data_plane_key_secret_name> \
     --set nginxAgent.endpointHost=agent.connect.nginx.com
     ```
-
-
-## Break Point
-    Choose on of the options below to install Nginx Plus ingress controller
-    Install KIC only without service
+Choose on of the options below to install Nginx Plus ingress controller
+    a. Install KIC only without service
+    ```
     helm install nginx-plus-kic oci://ghcr.io/nginx/charts/nginx-ingress \
     --version 2.4.1 \
     --set --set controller.image.repository=private-registry.nginx.com/nginx-ic/nginx-plus-ingress \
@@ -94,7 +92,9 @@ Before doing installation, understand below parameters:
     --set controller.serviceAccount.imagePullSecretName=regcred \
     --set controller.mgmt.licenseTokenSecretName=license-token \
     -n nginx-ingress
-    Install KIC with service nodeport
+    ```
+    b. Install KIC with service nodeport
+    ```
     helm install nginx-plus-kic oci://ghcr.io/nginx/charts/nginx-ingress \
     --version 2.4.1 \
     --set controller.image.repository=private-registry.nginx.com/nginx-ic-nap/nginx-plus-ingress \
@@ -106,13 +106,20 @@ Before doing installation, understand below parameters:
     --set controller.mgmt.licenseTokenSecretName=license-token \
     --set controller.service.type=NodePort \
     -n nginx-ingress
-    Enable nginx live dashboard
-    Add access-list to allow access to N+ live dashboard 
-    Enable service to access live dashboard
-    Verify KIC installations
-    kubectl get pods -n nginx-ingress
-    Check the ingressclass
-    kubectl get ingressclass
-    To uninstall through Helm chart
-    helm uninstall nginx-plus-kic -n nginx-ingress
+    ```
+7. Enable nginx live dashboard
+    a. Add access-list to allow access to N+ live dashboard 
+    b. Enable service to access live dashboard
+8. Verify KIC installations
+```
+kubectl get pods -n nginx-ingress
+```
+9. Check the ingressclass
+```
+kubectl get ingressclass
+```
+10. To uninstall through Helm chart
+```
+helm uninstall nginx-plus-kic -n nginx-ingress
+```
 
