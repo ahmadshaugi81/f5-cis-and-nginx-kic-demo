@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: replica-myt-hello-nginx
+  labels:
+    app: myt-hello-nginx
+    type: front-end
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myt-hello-nginx
+  template:
+    metadata:
+      name: pods-hello-nginx
+      labels:
+        app: myt-hello-nginx
+        type: front-end
+    spec:
+      containers:
+      - name: myt-hello-nginx-container
+        image: ahmadshaugi81/hello-nginx
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-myt-hello-nginx
+spec:
+  type: NodePort
+  selector:
+    app: myt-hello-nginx
+  ports:
+  - port: 80
+    targetPort: 80
+    nodePort: 30088

@@ -2,18 +2,20 @@ apiVersion: "cis.f5.com/v1"
 kind: VirtualServer 
 metadata:
   name: f5demo-vs
-  labels: f5cr: "true"
+  labels: 
+    f5cr: "true"
 spec:
   host: vs.f5demo.io
-  virtualServerAddress: "10.1.1.4"
+  virtualServerAddress: "10.202.84.11" #--> update as needed
+  virtualServerHTTPPort: 80
   persistenceProfile: "cookie"
   # botDefense: /Common/bot-defense
   # dos: /Common/dos
   # waf: /Common/waf_policy
   pools:
   - path: /
-    service: f5-demo
-    servicePort: 8090
+    service: service-myt-hello-nginx
+    servicePort: 30088 #--> adjust to match nodeport exposed port
     loadBalancingMethod: fastest-node
     monitor:
       type: http
