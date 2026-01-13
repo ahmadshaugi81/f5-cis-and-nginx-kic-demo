@@ -1,0 +1,23 @@
+apiVersion: "cis.f5.com/v1"
+kind: VirtualServer 
+metadata:
+  name: f5demo-vs
+  labels: f5cr: "true"
+spec:
+  host: vs.f5demo.io
+  virtualServerAddress: "10.1.1.4"
+  persistenceProfile: "cookie"
+  # botDefense: /Common/bot-defense
+  # dos: /Common/dos
+  # waf: /Common/waf_policy
+  pools:
+  - path: /
+    service: f5-demo
+    servicePort: 8090
+    loadBalancingMethod: fastest-node
+    monitor:
+      type: http
+      send: "GET /"
+      recv: ""
+      interval: 5
+      timeout: 16
