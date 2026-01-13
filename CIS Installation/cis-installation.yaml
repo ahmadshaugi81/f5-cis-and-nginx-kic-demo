@@ -1,0 +1,46 @@
+# Modify as needed
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-bigip-ctlr-deployment
+  namespace: kube-system
+spec:
+  # DO NOT INCREASE REPLICA COUNT
+  replicas: 1
+  selector:
+    matchLabels:
+      app: k8s-bigip-ctlr-deployment
+  template:
+    metadata:
+      name: k8s-bigip-ctlr-deployment
+      labels:
+        app: k8s-bigip-ctlr-deployment
+    spec:
+      serviceAccountName: bigip-ctlr
+      containers:
+        - name: k8s-bigip-ctlr
+            image: "f5networks/k8s-bigip-ctlr: latest"
+            imagePullPolicy: IfNotPresent
+            env:
+            - name: BIGIP_USERNAME 
+                valueFrom:
+                secretKeyRef:
+                    name: bigip-login
+                    key: username
+            - name: BIGIP_PASSWORD
+                valueFrom:
+                secretKeyRef:
+                    name: bigip-login
+                    key: password
+        command: ["/app/bin/k8s-bigip-ctlr"]
+        args: [
+            "--bigip-username=$(BIGIP_USERNAME)",
+            "--bigip-password=$(BIGIP_PASSWORD)",
+            "--bigip-url=https://<management-ip>", # Update with BIG-IP management address
+            "--insecure=true",
+            "--bigip-partition=kubernetes",
+            "--custom-resource-mode=true",
+            "--as3-validation=true",
+            "--log-as3-response=true",
+            "--pool-member-type=nodeport"
+        ]
