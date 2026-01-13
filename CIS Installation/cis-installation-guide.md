@@ -11,7 +11,7 @@ Install CIS
 
 kubectl create secret generic f5-bigip-ctlr-login -n kube-system --from-literal=username=admin --from-literal=password=<password>
 
-kubectl create secret generic bigip-login -n kube-system --from-literal=username=admin --from-literal=password=C3d3t3POC!
+kubectl create secret generic bigip-login -n kube-system --from-literal=username=admin --from-literal=password=<password>
 
 ```
 # for reference only
