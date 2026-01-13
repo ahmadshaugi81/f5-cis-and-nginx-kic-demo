@@ -13,6 +13,7 @@ kubectl create secret generic f5-bigip-ctlr-login -n kube-system --from-literal=
 
 kubectl create secret generic bigip-login -n kube-system --from-literal=username=admin --from-literal=password=C3d3t3POC!
 
+```
 # for reference only
 apiVersion: apps/v1
 kind: Deployment
@@ -59,6 +60,7 @@ spec:
             "--log-as3-response=true",
             "--pool-member-type=nodeport"
         ]
+```
 
 
       securityContext:
