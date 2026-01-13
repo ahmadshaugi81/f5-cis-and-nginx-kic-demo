@@ -7,7 +7,7 @@ metadata:
 spec:
   host: vs.f5demo.io
   virtualServerAddress: "10.202.84.11" #--> update as needed
-  virtualServerHTTPPort: 80
+  virtualServerHTTPPort: 80 #--> update as needed
   persistenceProfile: "cookie"
   # botDefense: /Common/bot-defense
   # dos: /Common/dos
