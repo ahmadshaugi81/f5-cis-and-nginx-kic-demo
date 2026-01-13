@@ -15,7 +15,7 @@ spec:
   pools:
   - path: /
     service: service-myt-hello-nginx
-    servicePort: 30088 #--> adjust to match nodeport exposed port
+    servicePort: 80 #--> adjust to match targetPort of the service
     loadBalancingMethod: fastest-node
     monitor:
       type: http
