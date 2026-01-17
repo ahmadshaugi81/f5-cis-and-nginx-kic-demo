@@ -24,14 +24,14 @@ spec:
           env:
           - name: BIGIP_USERNAME 
               valueFrom:
-              secretKeyRef:
-                  name: bigip-login
-                  key: username
+                secretKeyRef:
+                    name: bigip-login
+                    key: username
           - name: BIGIP_PASSWORD
               valueFrom:
-              secretKeyRef:
-                  name: bigip-login
-                  key: password
+                secretKeyRef:
+                    name: bigip-login
+                    key: password
       command: ["/app/bin/k8s-bigip-ctlr"]
       args: [
           "--bigip-username=$(BIGIP_USERNAME)",
