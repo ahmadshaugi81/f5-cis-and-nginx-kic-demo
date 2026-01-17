@@ -23,24 +23,24 @@ spec:
           imagePullPolicy: IfNotPresent
           env:
           - name: BIGIP_USERNAME 
-              valueFrom:
-                secretKeyRef:
-                    name: bigip-login
-                    key: username
+            valueFrom:
+              secretKeyRef:
+                  name: bigip-login
+                  key: username
           - name: BIGIP_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                    name: bigip-login
-                    key: password
-      command: ["/app/bin/k8s-bigip-ctlr"]
-      args: [
-          "--bigip-username=$(BIGIP_USERNAME)",
-          "--bigip-password=$(BIGIP_PASSWORD)",
-          "--bigip-url=https://10.1.1.4", # Update with BIG-IP management address
-          "--insecure=true",
-          "--bigip-partition=kubernetes",
-          "--custom-resource-mode=true",
-          "--as3-validation=true",
-          "--log-as3-response=true",
-          "--pool-member-type=nodeport"
-      ]
+            valueFrom:
+              secretKeyRef:
+                  name: bigip-login
+                  key: password
+        command: ["/app/bin/k8s-bigip-ctlr"]
+        args: [
+            "--bigip-username=$(BIGIP_USERNAME)",
+            "--bigip-password=$(BIGIP_PASSWORD)",
+            "--bigip-url=https://10.1.1.4", # Update with BIG-IP management address
+            "--insecure=true",
+            "--bigip-partition=kubernetes",
+            "--custom-resource-mode=true",
+            "--as3-validation=true",
+            "--log-as3-response=true",
+            "--pool-member-type=nodeport"
+        ]
