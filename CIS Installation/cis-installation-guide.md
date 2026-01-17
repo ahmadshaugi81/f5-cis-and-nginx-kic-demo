@@ -13,7 +13,9 @@ References: https://clouddocs.f5.com/containers/latest/userguide/kubernetes/#ins
 ```
 echo | openssl s_client -showcerts -servername <server-hostname>  -connect <server-ip-address>:<server-port> 2>/dev/null | openssl x509 -outform PEM > server_cert.pem
 ```
+
     Create configmap
+
 ```
 kubectl create configmap trusted-certs --from-file=./server_cert.pem  -n kube-system
 ```
