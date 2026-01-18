@@ -46,3 +46,13 @@ kubectl create secret generic bigip-login -n kube-system --from-literal=username
 ```
 kubectl create -f cis-installation.yaml
 ```
+
+## CIS VirtualServer
+
+After installing CIS pods on k8s system and create an application service on the cluster, then we need to create a VirtualServer object to exposed this service on K8S through F5 BIG-IP via CIS. This VirtualServer must be **_created on the same namespace as the application service_**. Run this command to create VirtualServer object:
+
+```
+kubectl -n <target-namespace> create -f cis-vs-creation.yaml
+```
+
+Refer to the official F5 CIS documentation for other [VirtualServer](https://clouddocs.f5.com/containers/latest/userguide/crd/virtualserver.html) components.
