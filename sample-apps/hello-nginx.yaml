@@ -1,7 +1,7 @@
 apiVersion: apps/v1
-kind: Deployment            # <--- Changed from ReplicaSet
+kind: Deployment            
 metadata:
-  name: deployment-myt-hello-nginx # Renamed for clarity
+  name: deployment-myt-hello-nginx
   labels:
     app: myt-hello-nginx
     type: front-end
