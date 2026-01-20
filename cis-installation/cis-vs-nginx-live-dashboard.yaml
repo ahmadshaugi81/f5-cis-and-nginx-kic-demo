@@ -19,6 +19,6 @@ spec:
     monitor:
       type: tcp
       send: "GET /dashboard.html" # Or whatever the dashboard path is
-      recv: "200 OK"
+      recv: ""
       interval: 5
       timeout: 16
