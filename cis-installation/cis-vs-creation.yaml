@@ -6,6 +6,7 @@ metadata:
     f5cr: "true"
 spec:
   host: vs.f5demo.io
+  virtualServerName: f5demo-vs
   virtualServerAddress: "10.202.84.11" #--> update as needed
   virtualServerHTTPPort: 80 #--> update as needed
   persistenceProfile: "cookie"
