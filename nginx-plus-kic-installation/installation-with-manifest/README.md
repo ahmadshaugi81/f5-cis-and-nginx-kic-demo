@@ -58,19 +58,3 @@ kubectl apply -f deployments/deployment/nginx-plus-ingress.yaml
 ```
 kubectl get pods -n nginx-ingress
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-2. Create Kubernetes secret to pull images from NGINX private registry
-```
-kubectl create secret docker-registry regcred --docker-server=private-registry.nginx.com --docker-username=`cat nginx-one-eval.jwt` --docker-password=none -n nginx-ingress
-```
