@@ -58,3 +58,7 @@ kubectl apply -f deployments/deployment/nginx-plus-ingress.yaml
 ```
 kubectl get pods -n nginx-ingress
 ```
+
+## Uninstall NGINX Ingress Controller
+
+To uninstall, please follow the [official documentation](https://docs.nginx.com/nginx-ingress-controller/install/manifests/#uninstall-nginx-ingress-controller).
