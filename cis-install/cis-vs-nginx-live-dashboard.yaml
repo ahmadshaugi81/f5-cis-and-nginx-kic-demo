@@ -17,7 +17,7 @@ spec:
     servicePort: 8080 #--> adjust to match targetPort of the service
     loadBalancingMethod: fastest-node
     monitor:
-      type: tcp
+      type: http
       send: "GET /dashboard.html" # Or whatever the dashboard path is
       recv: ""
       interval: 5

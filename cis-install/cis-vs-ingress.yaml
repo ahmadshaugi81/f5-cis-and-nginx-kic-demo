@@ -1,0 +1,24 @@
+apiVersion: "cis.f5.com/v1"
+kind: VirtualServer 
+metadata:
+  name: cis-vs-ingress
+  namespace: nginx-ingress
+  labels: 
+    f5cr: "true"
+spec:
+  host: vs.f5demo.io
+  virtualServerName: cis-vs-ingress
+  virtualServerAddress: "10.1.1.12" #--> update as needed
+  virtualServerHTTPPort: 80 #--> update as needed
+  persistenceProfile: "cookie"
+  pools:
+  - path: /
+    service: svc-nginx-ingress
+    servicePort: 80 #--> adjust to match targetPort of the service
+    loadBalancingMethod: fastest-node
+    monitor:
+      type: http
+      send: "GET /"
+      recv: ""
+      interval: 5
+      timeout: 16
