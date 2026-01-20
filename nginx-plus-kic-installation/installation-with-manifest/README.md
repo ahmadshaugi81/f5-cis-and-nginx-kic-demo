@@ -13,13 +13,22 @@ vi nginx-one-eval.crt
 vi nginx-one-eval.key
 ```
 
+2. Create Kubernetes secret to pull images from NGINX private registry
+```
+kubectl create secret docker-registry regcred --docker-server=private-registry.nginx.com --docker-username=`cat nginx-one-eval.jwt` --docker-password=none -n nginx-ingress
+```
+
 3. Create Kubernetes secret holding the NGINX Plus license
 ```
 kubectl create secret generic license-token --from-file=license.jwt=nginx-one-eval.jwt --type=nginx.com/license -n nginx-ingress
 ```
 
 Create a ConfigMap to customize your NGINX settings:
-```kubectl apply -f nginx-config.yaml```
+```
+kubectl apply -f nginx-config.yaml
+kubectl apply -f plus-mgmt-configmap.yaml
+```
+
 Create an IngressClass resource. NGINX Ingress Controller won’t start without an IngressClass resource.
 ```kubectl apply -f ingress-class.yaml```
 

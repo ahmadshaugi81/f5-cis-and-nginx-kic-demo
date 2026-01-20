@@ -30,7 +30,7 @@ spec:
         secret:
           secretName: license-token # Must match your secret name
       containers:
-      - image: nginx-plus-ingress:5.3.1
+      - image: private-registry.nginx.com/nginx-ic/nginx-plus-ingress:5.3.1
         imagePullPolicy: IfNotPresent
         name: nginx-plus-ingress
         ports:
@@ -92,7 +92,7 @@ spec:
           - -mgmt-configmap=$(POD_NAMESPACE)/nginx-config-mgmt
           - -report-ingress-status
           - -external-service=nginx-ingress
-          - -nginx-status-allow-cidrs 0.0.0.0/0
+          - -nginx-status-allow-cidrs=0.0.0.0/0
          #- -default-server-tls-secret=$(POD_NAMESPACE)/default-server-secret
          #- -enable-cert-manager
          #- -enable-external-dns
