@@ -3,7 +3,11 @@
 
 ## Installation Steps
 
-**Notes:** _Before begin, check the latest version of NGINX Ingress on this [link](https://github.com/nginx/kubernetes-ingress/releases)_
+**Notes:** _Before begin, check the latest version of NGINX Ingress on this [link](https://github.com/nginx/kubernetes-ingress/releases)_ and make sure already clone the repository
+```
+git clone https://github.com/ahmadshaugi81/f5-cis-and-nginx-kic-demo.git
+```
+</br>
 
 1. Go to folder for installation with manifest
 ```
