@@ -10,7 +10,7 @@ spec:
   virtualServerName: cis-vs-nginx-live-dashboard
   virtualServerAddress: "10.1.1.11" #--> update as needed
   virtualServerHTTPPort: 80 #--> update as needed
-  persistenceProfile: "source_addr"
+  persistenceProfile: "/Common/source_addr"
   pools:
   - path: /
     service: nginx-plus-live-dashboard
