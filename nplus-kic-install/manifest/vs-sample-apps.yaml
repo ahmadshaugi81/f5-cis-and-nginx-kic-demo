@@ -1,0 +1,15 @@
+apiVersion: k8s.nginx.org/v1
+kind: VirtualServer
+metadata:
+  name: kic-f5demo-vs
+  namespace: nginx-ingress
+spec:
+  host: vs.f5demo.io
+  upstreams:
+  - name: service-myt-hello-nginx
+    service: service-myt-hello-nginx
+    port: 80
+  routes:
+  - path: /
+    action:
+      pass: service-myt-hello-nginx
