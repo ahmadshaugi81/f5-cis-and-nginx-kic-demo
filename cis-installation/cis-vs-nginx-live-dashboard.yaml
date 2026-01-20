@@ -15,8 +15,6 @@ spec:
   - path: /
     service: nginx-plus-live-dashboard
     servicePort: 8080 #--> adjust to match targetPort of the service
-    loadBalancingMethod: round-robin
+    loadBalancingMethod: fastest-node
     monitor:
       type: tcp
-      interval: 5
-      timeout: 16
