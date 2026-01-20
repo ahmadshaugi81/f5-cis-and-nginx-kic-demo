@@ -22,3 +22,15 @@ spec:
         image: ahmadshaugi81/hello-nginx
         ports:
         - containerPort: 80   # Best practice: Explicitly declare the container port
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-myt-hello-nginx
+spec:
+  type: ClusterIP
+  selector:
+    app: myt-hello-nginx
+  ports:
+  - port: 80
+    targetPort: 80
