@@ -66,3 +66,10 @@ kubectl get pods -n nginx-ingress
 ## Uninstall NGINX Ingress Controller
 
 To uninstall, please follow the [official documentation](https://docs.nginx.com/nginx-ingress-controller/install/manifests/#uninstall-nginx-ingress-controller).
+
+## Service Creation
+
+1. To create service to expose NGINX Plus live dashboard:
+```
+kubectl apply -f nodeport-live-dashboard.yaml
+```
