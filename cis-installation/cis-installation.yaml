@@ -39,6 +39,8 @@ spec:
             "--bigip-url=https://10.1.1.4:8443", # Update with BIG-IP management address
             "--insecure=true",
             "--bigip-partition=kubernetes",
+            "--log-as3-response=true",   # <--- WAJIB ADA (Menampilkan body JSON error)
+            "--log-level=debug", # <--- WAJIB ADA (Agar log lebih rinci)
             "--custom-resource-mode=true",
             "--as3-validation=true",
             "--log-as3-response=true",
