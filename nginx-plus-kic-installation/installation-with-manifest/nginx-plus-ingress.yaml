@@ -23,17 +23,12 @@ spec:
       securityContext:
         seccompProfile:
           type: RuntimeDefault
-#      volumes:
-#      - name: nginx-etc
-#        emptyDir: {}
-#      - name: nginx-cache
-#        emptyDir: {}
-#      - name: nginx-lib
-#        emptyDir: {}
-#      - name: nginx-lib-state
-#        emptyDir: {}
-#      - name: nginx-log
-#        emptyDir: {}
+      imagePullSecrets:
+      - name: regcred # Must match your secret name
+      volumes:
+      - name: nginx-plus-license
+        secret:
+          secretName: license-token # Must match your secret name
       containers:
       - image: nginx-plus-ingress:5.3.1
         imagePullPolicy: IfNotPresent
@@ -97,6 +92,7 @@ spec:
           - -mgmt-configmap=$(POD_NAMESPACE)/nginx-config-mgmt
           - -report-ingress-status
           - -external-service=nginx-ingress
+          - -nginx-status-allow-cidrs 0.0.0.0/0
          #- -default-server-tls-secret=$(POD_NAMESPACE)/default-server-secret
          #- -enable-cert-manager
          #- -enable-external-dns
