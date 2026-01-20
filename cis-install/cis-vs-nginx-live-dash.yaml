@@ -13,7 +13,7 @@ spec:
   persistenceProfile: "/Common/source_addr"
   pools:
   - path: /
-    service: nginx-plus-live-dashboard
+    service: svc-nplus-live-dash
     servicePort: 8080 #--> adjust to match targetPort of the service
     loadBalancingMethod: fastest-node
     monitor:
