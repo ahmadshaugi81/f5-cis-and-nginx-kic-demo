@@ -70,10 +70,30 @@ kubectl get pods -n nginx-ingress
 ## Uninstall NGINX Ingress Controller
 
 To uninstall, please follow the [official documentation](https://docs.nginx.com/nginx-ingress-controller/install/manifests/#uninstall-nginx-ingress-controller).
+</br>
 
-## Service Creation
+## Service Creation for NGINX Live Dashboard
 
 1. To create service to expose NGINX Plus live dashboard:
 ```
-kubectl apply -f nodeport-live-dashboard.yaml
+kubectl apply -f np-svc-live-dash.yaml
 ```
+
+2. To expose this live dashboard through BIG-IP, create CIS virtualServer:
+```
+kubectl apply -f /cis-install/cis-vs-nginx-live-dash.yaml
+```
+</br>
+
+## Service Creation for NGINX Ingress Controller
+
+1. To create service to expose NGINX ingress controller:
+```
+kubectl apply -f np-svc-ingress.yaml
+```
+
+2. To expose KIC through BIG-IP, create CIS virtualServer:
+```
+kubectl apply -f /cis-install/cis-vs-ingress.yaml
+```
+</br>
