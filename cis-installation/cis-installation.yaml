@@ -36,7 +36,7 @@ spec:
           args: [
             "--bigip-username=$(BIGIP_USERNAME)",
             "--bigip-password=$(BIGIP_PASSWORD)",
-            "--bigip-url=https://10.1.1.4", # Update with BIG-IP management address
+            "--bigip-url=https://10.1.1.4:8443", # Update with BIG-IP management address
             "--insecure=true",
             "--bigip-partition=kubernetes",
             "--custom-resource-mode=true",
