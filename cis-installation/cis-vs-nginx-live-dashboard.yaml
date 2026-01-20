@@ -8,8 +8,8 @@ metadata:
 spec:
   host: dashboard.nginx.plus
   virtualServerName: cis-vs-nginx-live-dashboard
-  virtualServerAddress: "10.1.1.10" #--> update as needed
-  virtualServerHTTPPort: 80 #--> update as needed
+  virtualServerAddress: "10.1.1.4" #--> update as needed
+  virtualServerHTTPPort: 8080 #--> update as needed
   persistenceProfile: "source_addr"
   pools:
   - path: /
