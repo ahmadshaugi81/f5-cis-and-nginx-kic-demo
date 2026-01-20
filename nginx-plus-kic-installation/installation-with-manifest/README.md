@@ -1,5 +1,9 @@
 # UNDER CONSTRUCTION!!
-# NGINX PLUS KIC INSTALLATION WITH MANIFEST
+# Installation NGINX Plus Ingress Controller with Manifest
+
+## Installation Steps
+
+**Notes:** _Before begin, check the latest version of NGINX Ingress on this [link](https://github.com/nginx/kubernetes-ingress/releases)_
 
 1. Go to folder for installation with manifest
 ```
