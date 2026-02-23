@@ -11,7 +11,7 @@ spec:
     clientSSL: /Common/clientssl
     reference: bigip
   hosts:
-  - https.f5demo.io
+  - vs.f5demo.io
 ---
 apiVersion: "cis.f5.com/v1"
 kind: VirtualServer 
@@ -21,7 +21,7 @@ metadata:
   labels: 
     f5cr: "true"
 spec:
-  host: https.f5demo.io
+  host: vs.f5demo.io
   tlsProfileName: offload-tls-profile
   virtualServerName: cis-vs-ingress-443
   virtualServerAddress: "10.1.1.13" #--> update as needed
@@ -38,3 +38,17 @@ spec:
       recv: ""
       interval: 5
       timeout: 16
+---
+apiVersion: "cis.f5.com/v1"
+kind: VirtualServer 
+metadata:
+  name: cis-vs-ingress-80
+  namespace: nginx-ingress
+  labels: 
+    f5cr: "true"
+spec:
+  virtualServerName: cis-vs-ingress-80-redirect
+  iRules:
+  - /Common/_sys_https_redirect
+  virtualServerAddress: "10.1.1.13" #--> update as needed
+  virtualServerHTTPPort: 80 #--> update as needed

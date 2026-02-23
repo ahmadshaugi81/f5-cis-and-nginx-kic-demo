@@ -97,3 +97,16 @@ kubectl apply -f np-svc-ingress.yaml
 kubectl apply -f /cis-install/cis-vs-ingress.yaml
 ```
 </br>
+
+## Service Creation for NGINX Ingress Controller with HTTPS VS Offload on BIG-IP
+
+1. To create service to expose NGINX ingress controller:
+```
+kubectl apply -f np-svc-ingress.yaml
+```
+
+2. To expose KIC through BIG-IP with HTTPS VS with TLS offloading mechanism, create CIS virtualServer:
+```
+kubectl apply -f /cis-install/cis-vs-ingress-443.yaml
+```
+</br>
