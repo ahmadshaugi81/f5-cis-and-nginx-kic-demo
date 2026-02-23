@@ -7,7 +7,7 @@ metadata:
     f5cr: "true"
 spec:
   tls:
-    #termination: edge
+    termination: edge
     clientSSL: /Common/clientssl
     reference: bigip
   hosts:
@@ -24,7 +24,7 @@ spec:
   host: vs.f5demo.io
   tlsProfileName: offload-tls-profile
   virtualServerName: cis-vs-ingress-443
-  virtualServerAddress: "10.1.1.13" #--> update as needed
+  virtualServerAddress: "10.1.1.12" #--> update as needed
   virtualServerHTTPPort: 443 #--> update as needed
   persistenceProfile: "cookie"
   pools:
@@ -50,5 +50,5 @@ spec:
   virtualServerName: cis-vs-ingress-80-redirect
   iRules:
   - /Common/_sys_https_redirect
-  virtualServerAddress: "10.1.1.13" #--> update as needed
+  virtualServerAddress: "10.1.1.12" #--> update as needed
   virtualServerHTTPPort: 80 #--> update as needed
