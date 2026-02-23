@@ -10,7 +10,7 @@ spec:
     clientSSL: /Common/clientssl
     reference: bigip
   hosts:
-  - vs.f5demo.io
+  - https.f5demo.io
 ---
 apiVersion: "cis.f5.com/v1"
 kind: VirtualServer 
@@ -20,8 +20,8 @@ metadata:
   labels: 
     f5cr: "true"
 spec:
-  host: vs.f5demo.io
-  tlsProfileName: reencrypt-tls-coffee
+  host: https.f5demo.io
+  tlsProfileName: offload-tls-profile
   httpTraffic: redirect
   virtualServerName: cis-vs-ingress-443
   virtualServerAddress: "10.1.1.13" #--> update as needed
