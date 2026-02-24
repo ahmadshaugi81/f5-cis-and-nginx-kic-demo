@@ -25,12 +25,6 @@ spec:
           type: RuntimeDefault
       imagePullSecrets:
       - name: regcred # Must match your secret name
-      volumeMounts:
-      - name: nginx-agent-config
-        mountPath: /etc/nginx-agent/nginx-agent.conf
-        subPath: nginx-agent.conf
-      - name: dataplane-key
-        mountPath: /etc/nginx-agent/secrets
       volumes:
       - name: nginx-plus-license
         secret:
@@ -92,7 +86,13 @@ spec:
             secretKeyRef:
               name: nginx-one-key
               key: data-plane-key
-      args:
+        volumeMounts:
+        - name: nginx-agent-config
+          mountPath: /etc/nginx-agent/nginx-agent.conf
+          subPath: nginx-agent.conf
+        - name: dataplane-key
+          mountPath: /etc/nginx-agent/secrets
+        args:
           - -nginx-plus=true
           - -nginx-configmaps=$(POD_NAMESPACE)/nginx-config
           - -mgmt-configmap=$(POD_NAMESPACE)/nginx-config-mgmt
