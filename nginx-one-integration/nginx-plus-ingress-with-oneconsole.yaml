@@ -25,13 +25,22 @@ spec:
           type: RuntimeDefault
       imagePullSecrets:
       - name: regcred # Must match your secret name
+      volumeMounts:
+      - name: nginx-agent-config
+        mountPath: /etc/nginx-agent/nginx-agent.conf
+        subPath: nginx-agent.conf
+      - name: dataplane-key
+        mountPath: /etc/nginx-agent/secrets
       volumes:
       - name: nginx-plus-license
         secret:
           secretName: license-token # Must match your secret name
-      - name: agent-config
+      - name: nginx-agent-config
         configMap:
-          name: nginx-agent-conf
+          name: nginx-agent-config
+      - name: dataplane-key
+        secret:
+          secretName: nginx-one-key # Your Dataplane Key Secret Name>
       containers:
       - image: private-registry.nginx.com/nginx-ic/nginx-plus-ingress:5.3.1 # Check on release notes for latest version https://github.com/nginx/kubernetes-ingress/releases
         imagePullPolicy: IfNotPresent
@@ -83,10 +92,6 @@ spec:
             secretKeyRef:
               name: nginx-one-key
               key: data-plane-key
-      volumeMounts:
-      - name: agent-config
-        mountPath: /etc/nginx-agent/nginx-agent.conf
-        subPath: nginx-agent.conf
       args:
           - -nginx-plus=true
           - -nginx-configmaps=$(POD_NAMESPACE)/nginx-config
