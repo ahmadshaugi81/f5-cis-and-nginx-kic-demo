@@ -1,6 +1,6 @@
 # Caveats Found during NGINX One Console Integrations
 
-## Environments Error
+## Nginx Ingress Controller crash when using environments NGINX_AGENT_SERVER_TOKEN
 
 ### Issues
 When installing Nginx Plus Ingress, the pod are failed to created, and there is an error log on the pods like when we check with this command ```kubectl -n nginx-ingress logs <pod-name>```.
