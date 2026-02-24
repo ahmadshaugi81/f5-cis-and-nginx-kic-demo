@@ -59,7 +59,7 @@ kubectl apply -f https://raw.githubusercontent.com/nginx/kubernetes-ingress/v5.3
 
 10. Deploy NGINX Ingress Controller with deployment: Choose this method for the flexibility to dynamically change the number of NGINX Ingress Controller replicas.
 ```
-kubectl apply -f deployments/deployment/nginx-plus-ingress.yaml
+kubectl apply -f nginx-plus-ingress.yaml
 ```
 
 11. Verify NGINX ingress installation

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-agent-conf
+  namespace: nginx-ingress
+data:
+  nginx-agent.conf: |
+    # NGINX Agent configuration
+    server:
+      host: agent.connect.nginx.com
+      grpcPort: 443
+    # Enable metrics and process monitoring
+    nginx:
+      bin: /usr/sbin/nginx
+      conf_path: /etc/nginx/nginx.conf
