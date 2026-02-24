@@ -38,6 +38,10 @@ spec:
           items:
           - key: data-plane-key   # The key inside your k8s secret
             path: dataplane.key
+      - name: nginx-agent-lib
+        emptyDir: {}
+      - name: nginx-agent-log
+        emptyDir: {}
       containers:
       - image: private-registry.nginx.com/nginx-ic/nginx-plus-ingress:5.3.1 # Check on release notes for latest version https://github.com/nginx/kubernetes-ingress/releases
         imagePullPolicy: IfNotPresent
@@ -84,7 +88,7 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.name
-        # - name: NGINX_AGENT_SERVER_TOKEN
+        # - name: NGINX_AGENT_SERVER_TOKEN # Check the CAVEATS.md on why it is commented
         #   valueFrom:
         #     secretKeyRef:
         #       name: nginx-one-key
@@ -95,6 +99,10 @@ spec:
           subPath: nginx-agent.conf
         - name: dataplane-key
           mountPath: /etc/nginx-agent/secrets
+        - name: nginx-agent-lib # Check the CAVEATS.md on why it is needed
+          mountPath: /var/lib/nginx-agent # Check the CAVEATS.md on why it is needed
+        - name: nginx-agent-log # Check the CAVEATS.md on why it is needed
+          mountPath: /var/log/nginx-agent # Check the CAVEATS.md on why it is needed
         args:
           - -nginx-plus=true
           - -nginx-configmaps=$(POD_NAMESPACE)/nginx-config
