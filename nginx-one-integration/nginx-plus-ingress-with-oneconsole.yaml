@@ -83,6 +83,10 @@ spec:
             secretKeyRef:
               name: nginx-one-key
               key: data-plane-key
+      volumeMounts:
+      - name: agent-config
+        mountPath: /etc/nginx-agent/nginx-agent.conf
+        subPath: nginx-agent.conf
       args:
           - -nginx-plus=true
           - -nginx-configmaps=$(POD_NAMESPACE)/nginx-config
@@ -101,10 +105,6 @@ spec:
          #- -enable-prometheus-metrics
          #- -enable-service-insight
          #- -global-configuration=$(POD_NAMESPACE)/nginx-configuration
-      volumeMounts:
-      - name: agent-config
-        mountPath: /etc/nginx-agent/nginx-agent.conf
-        subPath: nginx-agent.conf
 #      initContainers:
 #      - image: nginx/nginx-ingress:5.3.1
 #        imagePullPolicy: IfNotPresent
