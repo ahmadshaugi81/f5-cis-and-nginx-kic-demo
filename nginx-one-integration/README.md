@@ -22,15 +22,21 @@ Before beginning, ensure you have the following from the official F5 NGINX Repor
 
 2. Create the Data Plane Key Secret for integration with NGINX One Console. 
 
-```kubectl create secret generic nginx-one-key --from-literal=data-plane-key=<YOUR_DATA_PLANE_KEY> -n nginx-ingress```
+```
+kubectl create secret generic nginx-one-key --from-literal=data-plane-key=<YOUR_DATA_PLANE_KEY> -n nginx-ingress
+```
 
 3. Create the NGINX Agent ConfigMap
 
-```kubectl apply -f nginx-agent-config.yaml```
+```
+kubectl apply -f nginx-agent-config.yaml
+```
 
 4. Deploy NGINX Plus Ingress Controller: Modify the standard nginx-plus-ingress.yaml manifest to include the NGINX One agent configuration. Apply the deployment:
 
-```kubectl apply -f deployment/nginx-plus-ingress-with-oneconsole.yaml```
+```
+kubectl apply -f deployment/nginx-plus-ingress-with-oneconsole.yaml
+```
 </br>
 
 ## Verification
