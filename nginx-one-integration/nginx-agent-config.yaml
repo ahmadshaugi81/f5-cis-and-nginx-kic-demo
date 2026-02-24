@@ -1,15 +1,47 @@
-apiVersion: v1
+# apiVersion: v1
+# kind: ConfigMap
+# metadata:
+#   name: nginx-agent-conf
+#   namespace: nginx-ingress
+# data:
+#   nginx-agent.conf: |
+#     # NGINX Agent configuration
+#     server:
+#       host: agent.connect.nginx.com
+#       grpcPort: 443
+#     # Enable metrics and process monitoring
+#     nginx:
+#       bin: /usr/sbin/nginx
+#       conf_path: /etc/nginx/nginx.conf
 kind: ConfigMap
+apiVersion: v1
 metadata:
-  name: nginx-agent-conf
+  name: nginx-agent-config
   namespace: nginx-ingress
 data:
-  nginx-agent.conf: |
-    # NGINX Agent configuration
-    server:
-      host: agent.connect.nginx.com
-      grpcPort: 443
-    # Enable metrics and process monitoring
-    nginx:
-      bin: /usr/sbin/nginx
-      conf_path: /etc/nginx/nginx.conf
+  nginx-agent.conf: |-
+    log:
+      # set log level (error, info, debug; default "info")
+      level: info
+      # set log path. if empty, don't log to file.
+      path: ""
+
+    allowed_directories:
+      - /etc/nginx
+      - /usr/lib/nginx/modules
+
+    features:
+      - certificates
+      - connection
+      - metrics
+      - file-watcher
+
+    ## command server settings
+    command:
+      server:
+        host: agent.connect.nginx.com
+        port: 443
+      auth:
+        tokenpath: "/etc/nginx-agent/secrets/dataplane.key"
+      tls:
+        skip_verify: false
