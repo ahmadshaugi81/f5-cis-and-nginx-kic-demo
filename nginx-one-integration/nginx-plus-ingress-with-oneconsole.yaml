@@ -35,6 +35,9 @@ spec:
       - name: dataplane-key
         secret:
           secretName: nginx-one-key # Your Dataplane Key Secret Name>
+          items:
+          - key: data-plane-key   # The key inside your k8s secret
+            path: dataplane.key
       containers:
       - image: private-registry.nginx.com/nginx-ic/nginx-plus-ingress:5.3.1 # Check on release notes for latest version https://github.com/nginx/kubernetes-ingress/releases
         imagePullPolicy: IfNotPresent
