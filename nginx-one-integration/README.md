@@ -35,7 +35,6 @@ Before beginning, ensure you have the following from the official F5 NGINX Repor
 ## Verification
 Once the pods are running, verify the connection:
 
-1. Check Pod Logs: ```kubectl logs <pod-name> -n nginx-ingress```
-Look for "NGINX Agent started" and "Successfully registered with NGINX One".
+1. Check Pod Logs: ```kubectl logs <pod-name> -n nginx-ingress```. Look for "NGINX Agent started" and "Successfully registered with NGINX One".
 
 2. Check NGINX One Console: Log in to the NGINX One Console, navigate to Manage > Instances. Your Kubernetes Ingress Controller should appear as a "Control Plane" with its associated pods listed as instances.
