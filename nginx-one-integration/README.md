@@ -35,7 +35,7 @@ kubectl apply -f nginx-agent-config.yaml
 4. Deploy NGINX Plus Ingress Controller: Modify the standard nginx-plus-ingress.yaml manifest to include the NGINX One agent configuration. Apply the deployment:
 
 ```
-kubectl apply -f deployment/nginx-plus-ingress-with-oneconsole.yaml
+kubectl apply -f nginx-plus-ingress-with-oneconsole.yaml
 ```
 </br>
 
