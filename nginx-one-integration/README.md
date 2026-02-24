@@ -31,6 +31,7 @@ Before beginning, ensure you have the following from the official F5 NGINX Repor
 4. Deploy NGINX Plus Ingress Controller: Modify the standard nginx-plus-ingress.yaml manifest to include the NGINX One agent configuration. Apply the deployment:
 
 ```kubectl apply -f deployment/nginx-plus-ingress-with-oneconsole.yaml```
+</br>
 
 ## Verification
 Once the pods are running, verify the connection:
