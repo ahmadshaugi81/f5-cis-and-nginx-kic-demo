@@ -12,8 +12,12 @@ Ingress instance is successfully integrated to Nginx One Console, but no metrics
 ### Sample Logs
 
 The errors you are seeing now are permission denied errors for local disk writes:
-    ```open /var/log/nginx-agent/opentelemetry-collector-agent.log: permission denied```
-    ```open /var/lib/nginx-agent/manifest.json: permission denied```
+    ```
+    open /var/log/nginx-agent/opentelemetry-collector-agent.log: permission denied
+    ```
+    ```
+    open /var/lib/nginx-agent/manifest.json: permission denied
+    ```
 
 ### Why & Resolutions
 
