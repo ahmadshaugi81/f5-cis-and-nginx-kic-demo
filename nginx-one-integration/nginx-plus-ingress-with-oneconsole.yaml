@@ -81,11 +81,11 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.name
-        - name: NGINX_AGENT_SERVER_TOKEN
-          valueFrom:
-            secretKeyRef:
-              name: nginx-one-key
-              key: data-plane-key
+        # - name: NGINX_AGENT_SERVER_TOKEN
+        #   valueFrom:
+        #     secretKeyRef:
+        #       name: nginx-one-key
+        #       key: data-plane-key
         volumeMounts:
         - name: nginx-agent-config
           mountPath: /etc/nginx-agent/nginx-agent.conf
