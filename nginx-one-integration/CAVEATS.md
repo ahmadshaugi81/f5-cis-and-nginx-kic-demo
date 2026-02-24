@@ -71,6 +71,7 @@ secret:
     path: dataplane.key   # The specific file name the Agent wants
 ```
 
+✅ **What this does:**
 By doing this, the NGINX Agent gets the token securely from the file it expects, the deprecation warning never triggers, KIC successfully reads the short version string, labels the pod, and connects to the NGINX One Console!
 
 </br>
