@@ -16,13 +16,14 @@
     ```
     kubectl -f apply clusterip-svc-ingress-nodeportlocal.yaml
     ```
+    After service created, you can check on the service that now it had annotations with nodeportlocal.
 
 4. Create new CIS VS
     ```
     kubectl -f apply cis-vs-ingress-443-nodeportlocal.yaml
     ```
 
-5. For verification process, first check the existing number of Nginx Plus KIC installed with ```kubectl -n nginx-ingress get pod``` and check the number of pool member on the last created VS on BIG-IP, where it should be match. Then scale the deployment number using command below:
+5. For verification process, first check the existing number of Nginx Plus KIC installed with ```kubectl -n nginx-ingress get pod -l app=nginx-ingress``` and check the number of pool member on the last created VS on BIG-IP, where it should be match. Then scale the deployment number using command below:
     ```
     kubectl -n nginx-ingress scale deployment nginx-ingress --replicas=6
     ```
