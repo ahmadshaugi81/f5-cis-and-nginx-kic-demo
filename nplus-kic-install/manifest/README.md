@@ -1,4 +1,3 @@
-# UNDER CONSTRUCTION!!
 # Installation NGINX Plus Ingress Controller with Manifest
 
 ## Installation Steps
@@ -11,17 +10,17 @@ git clone https://github.com/ahmadshaugi81/f5-cis-and-nginx-kic-demo.git
 
 1. Go to folder for installation with manifest
 ```
-cd nginx-plus-kic-installation/installation-with-manifest
+cd nplus-kic-install/manifest
 ```
 
 2. Create a namespace and a service account:
 ```
-kubectl apply -f deployments/common/ns-and-sa.yaml
+kubectl apply -f ns-and-sa.yaml
 ```
 
 3. Create a cluster role and binding for the service account:
 ```
-kubectl apply -f deployments/rbac/rbac.yaml
+kubectl apply -f rbac.yaml
 ```
 
 4. Create or upload Nginx Plus JWT license file, certificate, and key files. Paste the value on each file creation
@@ -70,6 +69,21 @@ kubectl get pods -n nginx-ingress
 ## Uninstall NGINX Ingress Controller
 
 To uninstall, please follow the [official documentation](https://docs.nginx.com/nginx-ingress-controller/install/manifests/#uninstall-nginx-ingress-controller).
+</br>
+
+## Sample Apps & Nginc Plus KIC virtualServer Creation
+
+1. Create sample apps deployment and service:
+```
+kubectl apply -f /sample-apps/hello-nginx.yaml
+```
+
+2. To expose this app through Nginx Plus KIC, create KIC virtualServer:
+```
+kubectl apply -f nic-vs-sample-apps.yaml
+```
+
+3. To verify, check the ```virtualServer``` status on K8S, or you may check on Nginx Live Dashboard (explained on the next sections), or verify config file by having shell session directly to the pods (Using command like ```kubectl exec -it <pod-name> -- /bin/bash```) or via Nginx One Console (explained on **nginx-one-integration** section)
 </br>
 
 ## Service Creation for NGINX Live Dashboard
