@@ -1,5 +1,5 @@
 # Caveats on NGINX One Console Integrations
-While building this lab, I was experiencing some issues while integrating Nginx KIC to Nginx One Console. After checking on several references (Thanks to Google Gemini ❤️❤️), I found the root cause and the resolutions. This caveats might not be relevant when future updates was release, but it will help at least for current release version and for my lab :) 
+While building this lab, I was experiencing some issues while integrating Nginx KIC to Nginx One Console. Thanks to Google Gemini ❤️❤️, it help me to found some reference, help finding the root cause, and also the resolutions. This caveats might not be relevant when future updates was release, but it will help at least for current release version and for my lab :) 
 </br>
 </br>
 
