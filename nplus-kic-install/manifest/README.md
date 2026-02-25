@@ -76,14 +76,14 @@ To uninstall, please follow the [official documentation](https://docs.nginx.com/
 ## Sample Apps & Nginc Plus KIC virtualServer Creation
 
 1. Create sample apps deployment and service:
-```
-kubectl apply -f /sample-apps/hello-nginx.yaml
-```
+    ```
+    kubectl apply -f /sample-apps/hello-nginx.yaml
+    ```
 
 2. To expose this app through Nginx Plus KIC, create KIC virtualServer:
-```
-kubectl apply -f nic-vs-sample-apps.yaml
-```
+    ```
+    kubectl apply -f nic-vs-sample-apps.yaml
+    ```
 
 3. To verify, check the ```virtualServer``` status on K8S, or you may check on Nginx Live Dashboard (explained on the next sections), or verify config file by having shell session directly to the pods (Using command like ```kubectl exec -it <pod-name> -- /bin/bash```) or via Nginx One Console (explained on **nginx-one-integration** section)
 </br>
