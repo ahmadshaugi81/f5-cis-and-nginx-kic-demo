@@ -1,4 +1,3 @@
-# UNDER CONSTRUCTION!!
 # Integration NGINX Plus Ingress Controller with NGINX One Console
 
 _This guide provides the official steps to install NGINX Plus as a Kubernetes Ingress Controller (KIC) using manifests and integrating it into the NGINX One console for centralized monitoring._
