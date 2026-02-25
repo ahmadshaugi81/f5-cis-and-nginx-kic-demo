@@ -27,7 +27,7 @@
     ```
     kubectl -n nginx-ingress scale deployment nginx-ingress --replicas=6
     ```
-Now check again the number of Nginx Plus KIC pod and BIG-IP pool member after scaling the replica.
+    Now check again the number of Nginx Plus KIC pod and BIG-IP pool member after scaling the replica.
 </br>
 
 ## Rollback to Nodeport (if needed)
