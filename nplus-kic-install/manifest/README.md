@@ -70,6 +70,7 @@ kubectl get pods -n nginx-ingress
 
 To uninstall, please follow the [official documentation](https://docs.nginx.com/nginx-ingress-controller/install/manifests/#uninstall-nginx-ingress-controller).
 </br>
+</br>
 
 ## Sample Apps & Nginc Plus KIC virtualServer Creation
 
