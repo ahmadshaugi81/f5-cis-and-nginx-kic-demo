@@ -1,4 +1,3 @@
-# UNDER CONSTRUCTION!!
 # F5 CIS Integration using Nodeportlocal for CNI Antrea
 
 Enabling NodePortLocal (NPL) is exactly what you want to do if you are running Antrea with F5 BIG-IP. It is arguably the most efficient way to route external traffic into a Kubernetes cluster.
@@ -87,8 +86,6 @@ With Antrea's NodePortLocal, Antrea assigns a specific port on the Node (from th
      Change the _[your-worker-name]_ value with your actual worker name
 
      If this now says ```enable: true```, we are in business and go to implementation steps!
-
-
 </br>
 
 ## Step-by-step Implementations
