@@ -1,0 +1,21 @@
+# For testing integration using Nodeportlocal, service only needs as ClusterIP and adding annotations
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    nodeportlocal.antrea.io/enabled: "true" # For nodeport local integrations to BIGIP 
+  name: svc-nginx-ingress-npl
+  namespace: nginx-ingress
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: 80
+    protocol: TCP
+    name: http
+  - port: 443
+    targetPort: 443
+    protocol: TCP
+    name: https
+  selector:
+    app: nginx-ingress

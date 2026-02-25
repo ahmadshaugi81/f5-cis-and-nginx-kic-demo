@@ -1,0 +1,54 @@
+apiVersion: cis.f5.com/v1
+kind: TLSProfile
+metadata:
+  name: offload-tls-profile-npl
+  namespace: nginx-ingress
+  labels:
+    f5cr: "true"
+spec:
+  tls:
+    termination: edge
+    clientSSL: /Common/clientssl
+    reference: bigip
+  hosts:
+  - "*.f5demo.io"
+---
+apiVersion: "cis.f5.com/v1"
+kind: VirtualServer 
+metadata:
+  name: cis-vs-ingress-443-npl
+  namespace: nginx-ingress
+  labels: 
+    f5cr: "true"
+spec:
+  host: "*.f5demo.io"
+  tlsProfileName: offload-tls-profile-npl
+  virtualServerName: cis-vs-ingress-443-npl
+  virtualServerAddress: "10.1.1.13" #--> update as needed
+  virtualServerHTTPPort: 443 #--> update as needed
+  persistenceProfile: "cookie"
+  pools:
+  - path: /
+    service: svc-nginx-ingress-npl
+    servicePort: 80 #--> adjust to match targetPort of the service
+    loadBalancingMethod: fastest-node
+    monitor:
+      type: http
+      send: "GET /"
+      recv: ""
+      interval: 5
+      timeout: 16
+---
+apiVersion: "cis.f5.com/v1"
+kind: VirtualServer 
+metadata:
+  name: cis-vs-ingress-80-npl
+  namespace: nginx-ingress
+  labels: 
+    f5cr: "true"
+spec:
+  virtualServerName: cis-vs-ingress-80-redirect-npl
+  iRules:
+  - /Common/_sys_https_redirect
+  virtualServerAddress: "10.1.1.13" #--> update as needed
+  virtualServerHTTPPort: 80 #--> update as needed
