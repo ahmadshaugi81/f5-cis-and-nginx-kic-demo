@@ -4,23 +4,23 @@
 ## Step-by-step Implementations
 1. Update CIS installation to use Nodeportlocal for pool member
     ```
-    kubectl -f apply cis-installation-nodeportlocal.yaml
+    kubectl apply -f cis-installation-nodeportlocal.yaml
     ```
 
 2. Create new ingress VS on Nginx Plus KIC
     ```
-    kubectl -f apply nic-vs-sample-apps-nodeportlocal.yaml
+    kubectl apply -f nic-vs-sample-apps-nodeportlocal.yaml
     ```
 
 3. Create new ingress service with ClusterIP using annotations nodeportlocal
     ```
-    kubectl -f apply clusterip-svc-ingress-nodeportlocal.yaml
+    kubectl apply -f clusterip-svc-ingress-nodeportlocal.yaml
     ```
     After service created, you can check on the service that now it had annotations with nodeportlocal.
 
 4. Create new CIS VS
     ```
-    kubectl -f apply cis-vs-ingress-443-nodeportlocal.yaml
+    kubectl apply -f cis-vs-ingress-443-nodeportlocal.yaml
     ```
 
 5. For verification process, first check the existing number of Nginx Plus KIC installed with ```kubectl -n nginx-ingress get pod -l app=nginx-ingress``` and check the number of pool member on the last created VS on BIG-IP, where it should be match. Then scale the deployment number using command below:
