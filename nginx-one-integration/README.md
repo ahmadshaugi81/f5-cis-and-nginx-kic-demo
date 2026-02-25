@@ -1,6 +1,6 @@
 # Integration NGINX Plus Ingress Controller with NGINX One Console
 
-_This guide provides the official steps to install NGINX Plus as a Kubernetes Ingress Controller (KIC) using manifests and integrating it into the NGINX One console for centralized monitoring._
+_This guide provides step-by-step to install NGINX Plus as a Kubernetes Ingress Controller (KIC) using manifests and integrating it into the NGINX One console for centralized monitoring._
 
 ## Prerequisites
 Before beginning, ensure you have the following from the official F5 NGINX Reports and NGINX One Console:
@@ -44,3 +44,7 @@ Once the pods are running, verify the connection:
 1. Check Pod Logs: ```kubectl logs <pod-name> -n nginx-ingress```. Look for "NGINX Agent started" and "Successfully registered with NGINX One".
 
 2. Check NGINX One Console: Log in to the NGINX One Console, navigate to Manage > Instances. Your Kubernetes Ingress Controller should appear as a "Control Plane" with its associated pods listed as instances.
+</br>
+
+## Some Caveats
+While building this lab, I found some caveats for integration with Nginx One Console. Please check on [this sections](CAVEATS.md) for the detail.
