@@ -1,6 +1,9 @@
-# Caveats Found during NGINX One Console Integrations
+# Caveats on NGINX One Console Integrations
+While building this lab, I was experiencing some issues while integrating Nginx KIC to Nginx One Console. After checking on several references (Thanks to Google Gemini ❤️❤️), I found the root cause and the resolutions. This caveats might not be relevant when future updates was release, but it will help at least for current release version and for my lab :) 
+</br>
 
-## Nginx Ingress Controller crash when using environments NGINX_AGENT_SERVER_TOKEN
+
+## 1# Nginx Ingress Controller crash when using environments NGINX_AGENT_SERVER_TOKEN
 
 ### Issues
 When installing Nginx Plus Ingress, the pod are failed to created, and there is an error log on the pods like when we check with this command ```kubectl -n nginx-ingress logs <pod-name>```.
@@ -76,7 +79,7 @@ By doing this, the NGINX Agent gets the token securely from the file it expects,
 
 </br>
 
-## Metrics not showing with Nginx Agent permission error
+## 2# Metrics not showing with Nginx Agent permission error
 
 ### Issues
 Ingress instance is successfully integrated to Nginx One Console, but no metrics show. When check the log Nginx Agent (kubectl exec -it -n nginx-ingress <pod-name> -- nginx-agent) then an error events found.
