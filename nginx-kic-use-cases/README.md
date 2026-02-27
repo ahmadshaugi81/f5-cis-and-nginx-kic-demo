@@ -11,6 +11,8 @@ We are going to demonstrate several use cases for Nginx Plus KIC, including:
 - Rate limiting
 - Log integration with Prometheus & Grafana
 
+## References
+
 ## Deploying Sample Apps
 1. Create new namespace and deploy apps-cafe
 ```
