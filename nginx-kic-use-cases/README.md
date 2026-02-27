@@ -17,4 +17,7 @@ We are going to demonstrate several use cases for Nginx Plus KIC, including:
 kubectl apply -f /sample-apps/ns-and-apps-cafe.yaml
 ```
 
-2.
+2. Create KIC VirtualServer
+```
+kubectl apply -f nic-vs-cafe-adv-routing.yaml
+```
