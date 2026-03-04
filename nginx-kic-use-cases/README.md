@@ -14,18 +14,7 @@ We are going to demonstrate several use cases for Nginx Plus KIC, including:
 ## References
 
 ## Deploying Sample Apps
-1. Create new namespace and deploy apps-cafe
-    ```
-    kubectl apply -f /sample-apps/ns-and-apps-cafe.yaml
-    ```
-
-2. Create TLS profile to be used on KIC VS
-    ```
-    kubectl create secret tls cafe-secret --cert=sample-tls.crt --key=sample-tls.key -n apps-cafe
-    kubectl create secret tls cafe-secret --cert=sample-tls.crt --key=sample-tls.key -n nginx-ingress
-    ```
-
-3. Preconfigured iRules on F5 BIG-IP to pass SNI flag to Nginx Plus KIC
+1. Preconfigured iRules on F5 BIG-IP to pass SNI flag to Nginx Plus KIC
 
     *Why it is needed?* _BIG-IP is not by default adding SNI extension on server side ([check this as reference](https://my.f5.com/manage/s/article/K000157250#:~:text=Cause,-The%20server%20SSL)). To resolve that refer this [KB about injecting SNI on server-side from BIG-IP](https://my.f5.com/manage/s/article/K000160184), and refer to this [KB about why Nginx CIS need SNI flag enabled](https://my.f5.com/s/article/K000140717)_
     </br>
@@ -45,6 +34,18 @@ We are going to demonstrate several use cases for Nginx Plus KIC, including:
         }
     }
     ```
+
+2. Create new namespace and deploy apps-cafe
+    ```
+    kubectl apply -f /sample-apps/ns-and-apps-cafe.yaml
+    ```
+
+3. Create TLS profile to be used on KIC VS
+    ```
+    kubectl create secret tls cafe-secret --cert=sample-tls.crt --key=sample-tls.key -n apps-cafe
+    kubectl create secret tls cafe-secret --cert=sample-tls.crt --key=sample-tls.key -n nginx-ingress
+    ```
+    
 4. Apply this manifest to create several objects, such as:
     - Rate limit policy for KIC
     - TLS profile for F5 BIG-IP
