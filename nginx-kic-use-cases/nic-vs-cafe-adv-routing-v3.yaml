@@ -80,13 +80,14 @@ spec:
     termination: reencrypt
     # Define clientssl profile
     clientSSL: cafe-secret
-    # clientSSLParams:
-    #   profileReference: secret
+    clientSSLParams:
+      profileReference: secret
     # Define serverssl profile
-    serverSSL: cafe-back-secret
+    serverSSL: /Common/serverssl-bank-mega
     serverSSLParams:
-      serverName: "cafe.f5demo.io"
-    reference: secret
+      # serverName: "cafe.f5demo.io" --> currently not supported, ETA available on CIS 2.20.4 (https://github.com/F5Networks/k8s-bigip-ctlr/issues/4001)
+      profileReference: bigip
+    reference: hybrid
   hosts:
   - "cafe.f5demo.io"
 ---
