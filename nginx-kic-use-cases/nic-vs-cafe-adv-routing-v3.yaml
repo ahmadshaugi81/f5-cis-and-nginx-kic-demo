@@ -78,11 +78,15 @@ metadata:
 spec:
   tls:
     termination: reencrypt
-    clientSSL: /Common/clientssl
-    clientSSLParams:
-    serverSSL: /Common/serverssl-insecure-compatible
+    # Define clientssl profile
+    clientSSL: cafe-secret
+    # clientSSLParams:
+    #   profileReference: secret
+    # Define serverssl profile
+    serverSSL: cafe-back-secret
     serverSSLParams:
-    reference: bigip
+      serverName: cafe.f5demo.io
+    reference: secret
   hosts:
   - "cafe.f5demo.io"
 ---
