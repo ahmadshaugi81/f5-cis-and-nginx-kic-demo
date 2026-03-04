@@ -32,6 +32,8 @@ spec:
     port: 80
   routes:
   - path: /tea
+    policies:
+    - name: rate-limit-policy
     matches:
     - conditions:
       - variable: $request_method
