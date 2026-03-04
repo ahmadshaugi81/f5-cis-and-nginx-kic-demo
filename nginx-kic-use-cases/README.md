@@ -40,7 +40,7 @@ We are going to demonstrate several use cases for Nginx Plus KIC, including:
     kubectl apply -f /sample-apps/ns-and-apps-cafe.yaml
     ```
 
-3. Create TLS profile to be used on KIC VS
+3. Create TLS profile to be used on VirtualServer objects on Nginx KIC and F5 CIS
     ```
     kubectl create secret tls cafe-secret --cert=sample-tls.crt --key=sample-tls.key -n apps-cafe
     kubectl create secret tls cafe-secret --cert=sample-tls.crt --key=sample-tls.key -n nginx-ingress
