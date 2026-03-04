@@ -78,11 +78,16 @@ metadata:
 spec:
   tls:
     termination: reencrypt
-    clientSSL: /Common/clientssl
+    # Define clientssl profile
+    clientSSL: cafe-secret
     clientSSLParams:
+      profileReference: secret
+    # Define serverssl profile    
     serverSSL: /Common/serverssl-insecure-compatible
     serverSSLParams:
-    reference: bigip
+      profileReference: bigip
+      # serverName: "cafe.f5demo.io" --> currently not supported, ETA available on CIS 2.20.4 (https://github.com/F5Networks/k8s-bigip-ctlr/issues/4001)
+    reference: hybrid
   hosts:
   - "cafe.f5demo.io"
 ---
@@ -98,6 +103,8 @@ spec:
   host: "cafe.f5demo.io"
   tlsProfileName: bridging-tls-profile-npl
   virtualServerName: cis-vs-cafe-443-npl
+  iRules:
+  - /Common/irules-sni
   virtualServerAddress: "10.1.1.14" #--> update as needed
   virtualServerHTTPPort: 443 #--> update as needed
   persistenceProfile: "cookie"
