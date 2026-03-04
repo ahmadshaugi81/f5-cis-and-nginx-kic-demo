@@ -67,7 +67,31 @@ spec:
     action:
       pass: coffee-v1
 ---
-# Creating TLS profile for CIS VirtualServer
+# # Creating TLS profile for CIS VirtualServer
+# apiVersion: cis.f5.com/v1
+# kind: TLSProfile
+# metadata:
+#   name: bridging-tls-profile-npl
+#   namespace: nginx-ingress
+#   labels:
+#     f5cr: "true"
+# spec:
+#   tls:
+#     termination: reencrypt
+#     # Define clientssl profile
+#     clientSSL: cafe-secret
+#     clientSSLParams:
+#       profileReference: secret
+#     # Define serverssl profile
+#     serverSSL: /Common/serverssl-bank-mega
+#     serverSSLParams:
+#       # serverName: "cafe.f5demo.io" --> currently not supported, ETA available on CIS 2.20.4 (https://github.com/F5Networks/k8s-bigip-ctlr/issues/4001)
+#       profileReference: bigip
+#     reference: hybrid
+#   hosts:
+#   - "cafe.f5demo.io"
+# ---
+# Creating TLS profile for CIS VirtualServer - testing
 apiVersion: cis.f5.com/v1
 kind: TLSProfile
 metadata:
@@ -78,16 +102,11 @@ metadata:
 spec:
   tls:
     termination: reencrypt
-    # Define clientssl profile
-    clientSSL: cafe-secret
+    clientSSL: /Common/clientssl
     clientSSLParams:
-      profileReference: secret
-    # Define serverssl profile
-    serverSSL: /Common/serverssl-bank-mega
+    serverSSL: /Common/serverssl-insecure-compatible
     serverSSLParams:
-      # serverName: "cafe.f5demo.io" --> currently not supported, ETA available on CIS 2.20.4 (https://github.com/F5Networks/k8s-bigip-ctlr/issues/4001)
-      profileReference: bigip
-    reference: hybrid
+    reference: bigip
   hosts:
   - "cafe.f5demo.io"
 ---
