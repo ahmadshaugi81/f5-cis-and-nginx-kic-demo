@@ -5,7 +5,7 @@ metadata:
   namespace: apps-cafe
 spec:
   rateLimit:
-    rate: 5r/m
+    rate: 3r/s
     key: ${binary_remote_addr}
     zoneSize: 10M
     rejectCode: 429
