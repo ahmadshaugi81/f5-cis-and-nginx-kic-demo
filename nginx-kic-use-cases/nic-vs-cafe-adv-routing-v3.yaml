@@ -85,7 +85,7 @@ spec:
     # Define serverssl profile
     serverSSL: cafe-back-secret
     serverSSLParams:
-      serverName: cafe.f5demo.io
+      serverName: "cafe.f5demo.io"
     reference: secret
   hosts:
   - "cafe.f5demo.io"
