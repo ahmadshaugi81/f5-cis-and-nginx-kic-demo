@@ -67,7 +67,7 @@ spec:
     action:
       pass: coffee-v1
 ---
-# Creating TLS profile for CIS VirtualServer - testing
+# Creating TLS profile for CIS VirtualServer
 apiVersion: cis.f5.com/v1
 kind: TLSProfile
 metadata:
