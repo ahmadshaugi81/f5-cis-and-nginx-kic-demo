@@ -103,6 +103,8 @@ spec:
   host: "cafe.f5demo.io"
   tlsProfileName: bridging-tls-profile-npl
   virtualServerName: cis-vs-cafe-443-npl
+  iRules:
+  - /Common/irules-sni
   virtualServerAddress: "10.1.1.14" #--> update as needed
   virtualServerHTTPPort: 443 #--> update as needed
   persistenceProfile: "cookie"

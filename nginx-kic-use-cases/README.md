@@ -22,6 +22,7 @@ kubectl apply -f /sample-apps/ns-and-apps-cafe.yaml
 2. Create TLS profile to be used on KIC VS
 ```
 kubectl create secret tls cafe-secret --cert=sample-tls.crt --key=sample-tls.key -n apps-cafe
+kubectl create secret tls cafe-secret --cert=sample-tls.crt --key=sample-tls.key -n nginx-ingress
 ```
 
 3. Create KIC VirtualServer
