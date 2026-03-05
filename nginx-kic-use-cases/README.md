@@ -21,7 +21,7 @@ All use cases was copied from [f5devcentral repo](https://github.com/f5devcentra
 
 1. Preconfigured iRules on F5 BIG-IP to pass SNI flag to Nginx Plus Ingress Controller
 
-    *Why it is needed?* _BIG-IP is not by default adding SNI extension on server side ([check this as reference](https://my.f5.com/manage/s/article/K000157250#:~:text=Cause,-The%20server%20SSL)). To resolve that refer this [KB about injecting SNI on server-side from BIG-IP](https://my.f5.com/manage/s/article/K000160184), and refer to this [KB about why Nginx CIS need SNI flag enabled](https://my.f5.com/s/article/K000140717)_
+    *Why is it needed?* _BIG-IP is not by default adding SNI extension on server side ([check this as reference](https://my.f5.com/manage/s/article/K000157250#:~:text=Cause,-The%20server%20SSL)). To resolve that, refer this [KB about injecting SNI on server-side from BIG-IP](https://my.f5.com/manage/s/article/K000160184), and refer to this [KB about why Nginx CIS need SNI flag enabled](https://my.f5.com/s/article/K000140717)_
     </br>
 
     **iRules Name:** _irules-sni_
@@ -40,7 +40,7 @@ All use cases was copied from [f5devcentral repo](https://github.com/f5devcentra
     }
     ```
 
-2. Create new namespace and deploy sample apps
+2. Create new namespace and deploy sample apps. It will show how we can do inter namespace routing kubernetes cluster
     ```
     kubectl apply -f /sample-apps/ns-and-apps-cafe.yaml
     ```
@@ -86,7 +86,7 @@ All use cases was copied from [f5devcentral repo](https://github.com/f5devcentra
     echo "Coffee v2: $coffee_v2_count times"
     ```
 
-6. Create **_token.jwt_** file for **JWT authentication** scenario
+6. Create **_token.jwt_** file on server that will simulate request from client for **JWT authentication** scenario. You can use this file directly when simulating request traffic, or copy and paste the JWT token directly when doing curl simulation.
     ```
     eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6IjAwMDEifQ.eyJuYW1lIjoiUXVvdGF0aW9uIFN5c3RlbSIsInN1YiI6InF1b3RlcyIsImlzcyI6Ik15IEFQSSBHYXRld2F5In0.ggVOHYnVFB8GVPE-VOIo3jD71gTkLffAY0hQOGXPL2I
     ```
