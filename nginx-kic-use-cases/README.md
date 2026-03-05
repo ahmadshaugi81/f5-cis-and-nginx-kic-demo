@@ -61,7 +61,7 @@ All use cases was copied from [this repo](https://github.com/f5devcentral/NGINX-
     kubectl apply -f nic-vs-cafe-adv-routing.yaml
     ```
 
-5. Create test.sh file on server that will simulate request from client on **traffic splitting** scenario. This shell script will generate traffic to _https://cafe.f5demo.io/split_, then it will print the results. Make sure that cafe.f5demo.io was can be reached from clients simulator (ex: creating /etc/hosts configuration), or modify the script as needed.
+5. Create **test.sh** file on server that will simulate request from client on **traffic splitting** scenario. This shell script will generate traffic to _https://cafe.f5demo.io/split_, then it will print the results. Make sure that cafe.f5demo.io was can be reached from clients simulator (ex: creating /etc/hosts configuration), or modify the script as needed.
 
     ```
     #!/bin/bash
@@ -88,6 +88,46 @@ All use cases was copied from [this repo](https://github.com/f5devcentral/NGINX-
 6. Create **_token.jwt_** file for **JWT authentication** scenario
     ```
     eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6IjAwMDEifQ.eyJuYW1lIjoiUXVvdGF0aW9uIFN5c3RlbSIsInN1YiI6InF1b3RlcyIsImlzcyI6Ik15IEFQSSBHYXRld2F5In0.ggVOHYnVFB8GVPE-VOIo3jD71gTkLffAY0hQOGXPL2I
+    ```
+
+7. Create **rate-limit-test.sh** file on server that will simulate request from client on **rate limit** scenario. This shell script will generate traffic to _https://cafe.f5demo.io/tea_, with various time interval between 0.25, 0.5, 0.75, and 1 second, then it will print the total number of response code received, whether it is 200 or 429 (rate limit). Make sure that cafe.f5demo.io was can be reached from clients simulator (ex: creating /etc/hosts configuration), or modify the script as needed.
+
+    ```
+    #!/bin/bash
+
+    # Target URL
+    URL="https://cafe.f5demo.io/tea"
+    TOTAL_REQUESTS=100
+    INTERVALS=(0.25 0.5 0.75 1)
+
+    # Associative array to store response code counts
+    declare -A status_counts
+
+    echo "Starting $TOTAL_REQUESTS requests to $URL..."
+
+    for ((i=1; i<=TOTAL_REQUESTS; i++)); do
+        # Pick a random interval from the list
+        SLEEP_TIME=${INTERVALS[$RANDOM % ${#INTERVALS[@]}]}
+        
+        # Perform the request and capture the HTTP status code
+        # -s: silent, -o /dev/null: discard body, -w: output format
+        HTTP_CODE=$(curl -sk -o /dev/null -w "%{http_code}" "$URL")
+        
+        # Increment the count for this specific status code
+        ((status_counts[$HTTP_CODE]++))
+        
+        echo "Request $i: Received $HTTP_CODE (Next wait: ${SLEEP_TIME}s)"
+        
+        # Wait for the interval before the next request (unless it's the last one)
+        if [ $i -lt $TOTAL_REQUESTS ]; then
+            sleep $SLEEP_TIME
+        fi
+    done
+
+    echo -e "\n--- Final Results ---"
+    for code in "${!status_counts[@]}"; do
+        echo "Response $code: ${status_counts[$code]} times"
+    done
     ```
 </br>
 
@@ -261,4 +301,14 @@ Coffee v2: 30 times
 </br>
 
 ### Rate Limiting Scenario
-This use case applies rate limiting for an application exposed through Nginx Plus KIC.
+This use case applies rate limiting for an application exposed through Nginx Plus KIC. The **rate-limit-policy** will limit request with maximum 3 request/seconds. Run the rate-limit-test.sh script:
+```
+./rate-limit-test.sh
+```
+
+Output should be similar to:
+```
+--- Final Results ---
+Response 429: 27 times
+Response 200: 73 times
+```
