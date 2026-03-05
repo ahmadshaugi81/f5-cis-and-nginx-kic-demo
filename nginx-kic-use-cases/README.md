@@ -337,4 +337,4 @@ Response 429: 27 times
 Response 200: 73 times
 ```
 
-The number of 429 HTTP response code was showing the number of request rejected because violation the rate limit policy.
+The total number of 429 HTTP response code was showing numbers of request rejected because violating the rate limit policy.
