@@ -1,6 +1,6 @@
 # NGINX Plus Ingress Controller Use Cases
 
-We are going to demonstrate several use cases for Nginx Plus KIC & F5 Container Ingress Service, including:
+We are going to demonstrate several use cases for Nginx Plus Ingress Controller & F5 Container Ingress Service, including:
 - Inter namespace routing
 - Basic & advanced routing
 - TLS termination on BIG-IP and Nginx Plus Ingress Controller
@@ -17,7 +17,7 @@ All use cases was copied from [this repo](https://github.com/f5devcentral/NGINX-
 
 ## Configuration Steps
 
-1. Preconfigured iRules on F5 BIG-IP to pass SNI flag to Nginx Plus KIC
+1. Preconfigured iRules on F5 BIG-IP to pass SNI flag to Nginx Plus Ingress Controller
 
     *Why it is needed?* _BIG-IP is not by default adding SNI extension on server side ([check this as reference](https://my.f5.com/manage/s/article/K000157250#:~:text=Cause,-The%20server%20SSL)). To resolve that refer this [KB about injecting SNI on server-side from BIG-IP](https://my.f5.com/manage/s/article/K000160184), and refer to this [KB about why Nginx CIS need SNI flag enabled](https://my.f5.com/s/article/K000140717)_
     </br>
@@ -43,7 +43,7 @@ All use cases was copied from [this repo](https://github.com/f5devcentral/NGINX-
     kubectl apply -f /sample-apps/ns-and-apps-cafe.yaml
     ```
 
-3. Create TLS profile to be used on VirtualServer objects on Nginx Plus KIC and F5 CIS
+3. Create TLS profile to be used on VirtualServer objects on Nginx Plus Ingress Controller and F5 CIS
     ```
     kubectl create secret tls cafe-secret --cert=sample-tls.crt --key=sample-tls.key -n apps-cafe
     kubectl create secret tls cafe-secret --cert=sample-tls.crt --key=sample-tls.key -n nginx-ingress
@@ -53,7 +53,7 @@ All use cases was copied from [this repo](https://github.com/f5devcentral/NGINX-
     - Rate limit policy for KIC
     - JWK secret & JWT validation policy for KIC
     - TLS profile for F5 BIG-IP
-    - VS on Nginx Plus KIC and F5 CIS
+    - VS on Nginx Plus Ingress Controller and F5 CIS
     </br>
 
     ```
@@ -137,14 +137,22 @@ In Kubernetes, Inter-namespace routing is a common architecture where a shared I
 
 Even though the Ingress Controller and your Service are in different namespaces, they communicate seamlessly because Kubernetes Networking is flat—meaning every Pod can reach every Service across the entire cluster by default.
 
-From the **ns-and-apps-cafe.yaml** manifest file, it will create new namespace **_apps-cafe_**, then deploy several service on this new namespace. Our Nginx Plus KIC will stay on namespace **_nginx-ingress_**, but it will be able to discover service on the different namespace, which apps-cafe on this case, and routed traffic there. 
+From the **ns-and-apps-cafe.yaml** manifest file, it will create new namespace **_apps-cafe_**, then deploy several service on this new namespace. Our Nginx Plus Ingress Controller will stay on namespace **_nginx-ingress_**, but it will be able to discover service on the different namespace, which apps-cafe on this case, and routed traffic there. 
 
-The Nginx Plus KIC VirtualServer should be created inside **_apps-cafe_** namespace, while the F5 CIS VirtualServer will be created inside **_nginx-ingress_** namespace. When all object created and successfully deployed, then the inter namespace routing will work as expected.
+The Nginx Plus Ingress Controller VirtualServer should be created inside **_apps-cafe_** namespace, while the F5 CIS VirtualServer will be created inside **_nginx-ingress_** namespace. When all object created and successfully deployed, then the inter namespace routing will work as expected.
 
-In our lab, one of the key on how it is possible is because the RBAC that we deployed during Nginx Plus KIC installation, that will permit Nginx Plus KIC to work across all namespaces in the cluster.
+In our lab, one of the key on how it is possible is because the RBAC that we deployed during Nginx Plus Ingress Controller installation, that will permit Nginx Plus Ingress Controller to work across all namespaces in the cluster.
+</br>
+
+### TLS termination on BIG-IP and Nginx Plus Ingress Controller
+When applying the **nic-vs-cafe-adv-routing.yaml** manifest file, we can see:
+    - On the Nginx Plus Ingress Controller spec.tls, it will used the **cafe-secret** secret that was created before for doing TLS termination (offloading on this case) when handling incoming request
+    - For the F5 CIS, we are creating a **TLSProfile** named **bridging-tls-profile-npl**, that will do TLS termination with mode bridging (termination: reencrypt). For the clientside SSL, it will used the same **cafe-secret** secret cert & key, and for the serverside SSL it will used the preconfigured **serverssl-insecure-compatible** profile on BIGIP. Because using combination of clientside and serverside SSL profile, then the **reference** on the manifest are using **hybrid** mode.
+
+On the F5 CIS VirtualServer **cis-vs-cafe-443-npl** creation, it will also attaching the iRules **/Common/irules-sni** that must be manually configured on BIG-IP as a prerequsites as mention above. This iRules will pass the SNI extension flag on the serverside, which then will be used by Nginx Plus Ingress Controller to determine on how to handle the incoming request.
 
 ### Advanced Routing Scenario
-Basically all scenario here are doing advanced routing, where Nginx Plus KIC will do routing in various conditions.
+Basically all scenario here are doing advanced routing, where Nginx Plus Ingress Controller will do routing in various conditions.
 1. When requesting to URI /tea with method POST, it will routed to service _tea-post_
     ```
     curl -ik https://cafe.f5demo.io/tea -X POST
@@ -243,7 +251,7 @@ Basically all scenario here are doing advanced routing, where Nginx Plus KIC wil
     </br>
 
 ### JWT Authentication Scenario
-This use case shows how to enforce JWT authentication at the Nginx Plus KIC level. It will show how Nginx Plus KIC will inspect request to check it's authentication header, pass every authenticated request, and reject the unauthorized access.
+This use case shows how to enforce JWT authentication at the Nginx Plus Ingress Controller level. It will show how Nginx Plus Ingress Controller will inspect request to check it's authentication header, pass every authenticated request, and reject the unauthorized access.
 
 1. Simulate unauthorized request without token
     ```
@@ -311,7 +319,7 @@ Coffee v2: 30 times
 </br>
 
 ### Rate Limiting Scenario
-This use case applies rate limiting for an application exposed through Nginx Plus KIC. The **rate-limit-policy** will limit request with maximum 3 request/seconds. Run the rate-limit-test.sh script:
+This use case applies rate limiting for an application exposed through Nginx Plus Ingress Controller. The **rate-limit-policy** will limit request with maximum 3 request/seconds. Run the rate-limit-test.sh script:
 ```
 ./rate-limit-test.sh
 ```
