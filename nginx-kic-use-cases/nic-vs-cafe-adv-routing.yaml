@@ -10,7 +10,27 @@ spec:
     key: ${binary_remote_addr}
     zoneSize: 10M
     rejectCode: 429
----    
+---
+# Creating JWK secret
+apiVersion: v1
+kind: Secret
+metadata:
+  name: jwk-secret
+type: nginx.org/jwk
+data:
+  jwk: eyJrZXlzIjoKICAgIFt7CiAgICAgICAgImsiOiJabUZ1ZEdGemRHbGphbmQwIiwKICAgICAgICAia3R5Ijoib2N0IiwKICAgICAgICAia2lkIjoiMDAwMSIKICAgIH1dCn0K
+---
+# Creating JWT authentication policy
+apiVersion: k8s.nginx.org/v1
+kind: Policy
+metadata:
+  name: jwt-policy
+spec:
+  jwt:
+    realm: MyProductAPI
+    secret: jwk-secret
+    token: $http_token
+---
 # Creating VirtualServer on Nginx Plus KIC
 apiVersion: k8s.nginx.org/v1
 kind: VirtualServer
@@ -33,6 +53,9 @@ spec:
     port: 80
   - name: coffee-v2
     service: coffee-v2-svc
+    port: 80
+  - name: webapp
+    service: webapp-svc
     port: 80
   routes:
   - path: /tea
@@ -63,6 +86,9 @@ spec:
     - weight: 30
       action:
         pass: coffee-v2
+  - path: /webapp
+    action:
+      pass: webapp
 ---
 # Creating TLS profile for CIS VirtualServer
 apiVersion: cis.f5.com/v1
