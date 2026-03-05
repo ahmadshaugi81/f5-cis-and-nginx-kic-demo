@@ -144,12 +144,15 @@ The Nginx Plus Ingress Controller VirtualServer should be created inside **_apps
 In our lab, one of the key on how it is possible is because the RBAC that we deployed during Nginx Plus Ingress Controller installation, that will permit Nginx Plus Ingress Controller to work across all namespaces in the cluster.
 </br>
 
+
 ### TLS termination on BIG-IP and Nginx Plus Ingress Controller
 When applying the **nic-vs-cafe-adv-routing.yaml** manifest file, we can see:
     - On the Nginx Plus Ingress Controller spec.tls, it will used the **cafe-secret** secret that was created before for doing TLS termination (offloading on this case) when handling incoming request
     - For the F5 CIS, we are creating a **TLSProfile** named **bridging-tls-profile-npl**, that will do TLS termination with mode bridging (termination: reencrypt). For the clientside SSL, it will used the same **cafe-secret** secret cert & key, and for the serverside SSL it will used the preconfigured **serverssl-insecure-compatible** profile on BIGIP. Because using combination of clientside and serverside SSL profile, then the **reference** on the manifest are using **hybrid** mode.
 
 On the F5 CIS VirtualServer **cis-vs-cafe-443-npl** creation, it will also attaching the iRules **/Common/irules-sni** that must be manually configured on BIG-IP as a prerequsites as mention above. This iRules will pass the SNI extension flag on the serverside, which then will be used by Nginx Plus Ingress Controller to determine on how to handle the incoming request.
+</br>
+
 
 ### Advanced Routing Scenario
 Basically all scenario here are doing advanced routing, where Nginx Plus Ingress Controller will do routing in various conditions.
@@ -250,6 +253,7 @@ Basically all scenario here are doing advanced routing, where Nginx Plus Ingress
     ```
     </br>
 
+
 ### JWT Authentication Scenario
 This use case shows how to enforce JWT authentication at the Nginx Plus Ingress Controller level. It will show how Nginx Plus Ingress Controller will inspect request to check it's authentication header, pass every authenticated request, and reject the unauthorized access.
 
@@ -303,6 +307,7 @@ This use case shows how to enforce JWT authentication at the Nginx Plus Ingress 
     ```
     </br>
 
+
 ### Traffic Splitting Scenario
 This use case configures traffic splitting for a sample application with two services: coffee-v1-svc and coffee-v2-svc 70% of the coffee application traffic is sent to coffee-v1-svc the remaining 30% to coffee-v2-svc. To simulate a series of 100 requests, test access using the script provided. It sends 100 requests and shows the traffic split ratio
 
@@ -317,6 +322,7 @@ Coffee v1: 70 times
 Coffee v2: 30 times
 ```
 </br>
+
 
 ### Rate Limiting Scenario
 This use case applies rate limiting for an application exposed through Nginx Plus Ingress Controller. The **rate-limit-policy** will limit request with maximum 3 request/seconds. Run the rate-limit-test.sh script:
