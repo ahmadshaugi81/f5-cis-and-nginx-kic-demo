@@ -57,10 +57,10 @@ spec:
       pass: coffee-v1
   - path: /split
     splits:
-    - weight: 90
+    - weight: 70
       action:
         pass: coffee-v1
-    - weight: 10
+    - weight: 30
       action:
         pass: coffee-v2
 ---
