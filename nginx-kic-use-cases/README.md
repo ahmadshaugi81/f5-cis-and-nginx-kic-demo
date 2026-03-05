@@ -95,7 +95,7 @@ All use cases was copied from [this repo](https://github.com/f5devcentral/NGINX-
 ## Testing the Use Cases
 ### Advanced Routing Scenario
 Basically all scenario here are doing advanced routing, where Nginx Plus KIC will do routing in various conditions.
-1. When requesting to URI /tea with method POST, it will routed to service tea-post
+1. When requesting to URI /tea with method POST, it will routed to service _tea-post_
     ```
     curl -ik https://cafe.f5demo.io/tea -X POST
     ```
@@ -113,8 +113,80 @@ Basically all scenario here are doing advanced routing, where Nginx Plus KIC wil
     Set-Cookie: BIGipServer~kubernetes~Shared~svc_nginx_ingress_npl_443_nginx_ingress_cafe_f5demo_io=117506314.19182.0000; path=/; Httponly; Secure
 
     Server address: 192.168.2.12:8080
-    **_Server name: tea-post-ff7789454-g997n_**
+    Server name: tea-post-ff7789454-g997n <<--- routed to service tea-post
     Date: 05/Mar/2026:15:21:07 +0000
     URI: /tea
     Request ID: f533fa08c8ea44634be43538c4f2991c
+    ```
+
+2. When requesting to URI /tea with all other method, it will routed to service _tea_
+    ```
+    curl -ik https://cafe.f5demo.io/tea
+    ```
+
+    Expected result:
+    ```
+    HTTP/1.1 200 OK
+    Server: nginx/1.29.3
+    Date: Thu, 05 Mar 2026 15:25:50 GMT
+    Content-Type: text/plain
+    Content-Length: 156
+    Connection: keep-alive
+    Expires: Thu, 05 Mar 2026 15:25:49 GMT
+    Cache-Control: no-cache
+    Set-Cookie: BIGipServer~kubernetes~Shared~svc_nginx_ingress_npl_443_nginx_ingress_cafe_f5demo_io=117506314.19182.0000; path=/; Httponly; Secure
+
+    Server address: 192.168.1.16:8080
+    Server name: tea-6fbfdcb95d-qfb9h <<--- routed to service tea
+    Date: 05/Mar/2026:15:25:50 +0000
+    URI: /tea
+    Request ID: e83dcd104bac90c2ee2110d197f648d4
+    ```
+
+3. When requesting to URI /coffee with cookies "v2", it will routed to service _coffee-v2_
+    ```
+    curl -ik https://cafe.f5demo.io/coffee --cookie "version=v2"
+    ```
+
+    Expected result:
+    ```
+    HTTP/1.1 200 OK
+    Server: nginx/1.29.3
+    Date: Thu, 05 Mar 2026 15:27:56 GMT
+    Content-Type: text/plain
+    Content-Length: 165
+    Connection: keep-alive
+    Expires: Thu, 05 Mar 2026 15:27:55 GMT
+    Cache-Control: no-cache
+    Set-Cookie: BIGipServer~kubernetes~Shared~svc_nginx_ingress_npl_443_nginx_ingress_cafe_f5demo_io=117506314.19182.0000; path=/; Httponly; Secure
+
+    Server address: 192.168.2.10:8080
+    Server name: coffee-v2-677787799d-kqkhh <<---
+    Date: 05/Mar/2026:15:27:56 +0000
+    URI: /coffee
+    Request ID: 9739f2d304c2ac3cd7e6efd13a0bf863
+    ```
+
+4. When requesting to URI /coffee without custom cookie, it will routed to service _coffee-v1_
+    ```
+    curl -ik https://cafe.f5demo.io/coffee
+    ```
+
+    Expected result:
+    ```
+    HTTP/1.1 200 OK
+    Server: nginx/1.29.3
+    Date: Thu, 05 Mar 2026 15:29:42 GMT
+    Content-Type: text/plain
+    Content-Length: 163
+    Connection: keep-alive
+    Expires: Thu, 05 Mar 2026 15:29:41 GMT
+    Cache-Control: no-cache
+    Set-Cookie: BIGipServer~kubernetes~Shared~svc_nginx_ingress_npl_443_nginx_ingress_cafe_f5demo_io=117506314.19182.0000; path=/; Httponly; Secure
+
+    Server address: 192.168.2.9:8080
+    Server name: coffee-v1-767764946-wj2qq <<----
+    Date: 05/Mar/2026:15:29:42 +0000
+    URI: /coffee
+    Request ID: fbd65a25ffda7a11c6f71be9f1c760f3
     ```
