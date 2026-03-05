@@ -325,7 +325,7 @@ Coffee v2: 30 times
 
 
 ### Rate Limiting Scenario
-This use case applies rate limiting for an application exposed through Nginx Plus Ingress Controller. The **rate-limit-policy** will limit request with maximum 3 request/seconds. Run the rate-limit-test.sh script:
+This use case applies rate limiting for an application exposed through Nginx Plus Ingress Controller. The **rate-limit-policy** will limit request with maximum 3 request/seconds. Run the rate-limit-test.sh script to test this policy:
 ```
 ./rate-limit-test.sh
 ```
@@ -336,3 +336,5 @@ Output should be similar to:
 Response 429: 27 times
 Response 200: 73 times
 ```
+
+The number of 429 HTTP response code was showing the number of request rejected because violation the rate limit policy.
