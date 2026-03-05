@@ -55,6 +55,14 @@ spec:
         pass: coffee-v2
     action:
       pass: coffee-v1
+  - path: /split
+    splits:
+    - weight: 90
+      action:
+        pass: coffee-v1
+    - weight: 10
+      action:
+        pass: coffee-v2
 ---
 # Creating TLS profile for CIS VirtualServer
 apiVersion: cis.f5.com/v1
