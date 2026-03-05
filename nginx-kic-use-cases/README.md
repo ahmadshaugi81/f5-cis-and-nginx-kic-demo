@@ -190,3 +190,57 @@ Basically all scenario here are doing advanced routing, where Nginx Plus KIC wil
     URI: /coffee
     Request ID: fbd65a25ffda7a11c6f71be9f1c760f3
     ```
+    </br>
+
+### JWT Authentication Scenario
+This use case shows how to enforce JWT authentication at the Nginx Plus KIC level. It will show how Nginx Plus KIC will inspect request to check it's authentication header, pass every authenticated request, and reject the unauthorized access.
+
+1. Simulate unauthorized request without token
+    ```
+    curl -ik https://cafe.f5demo.io/webapp
+    ```
+
+    Request will be rejected and received **401 Unauthorized** response:
+    ```
+    HTTP/1.1 401 Unauthorized
+    Server: nginx/1.29.3
+    Date: Thu, 05 Mar 2026 15:33:35 GMT
+    Content-Type: text/html
+    Content-Length: 179
+    Connection: keep-alive
+    WWW-Authenticate: Bearer realm="MyProductAPI"
+    Set-Cookie: BIGipServer~kubernetes~Shared~svc_nginx_ingress_npl_443_nginx_ingress_cafe_f5demo_io=117506314.19182.0000; path=/; Httponly; Secure
+
+    <html>
+    <head><title>401 Authorization Required</title></head>
+    <body>
+    <center><h1>401 Authorization Required</h1></center>
+    <hr><center>nginx/1.29.3</center>
+    </body>
+    </html>
+    ```
+
+2. Simulate request with JWT token on request header
+    ```
+    curl -ik https://cafe.f5demo.io/webapp -H "token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6IjAwMDEifQ.eyJuYW1lIjoiUXVvdGF0aW9uIFN5c3RlbSIsInN1YiI6InF1b3RlcyIsImlzcyI6Ik15IEFQSSBHYXRld2F5In0.ggVOHYnVFB8GVPE-VOIo3jD71gTkLffAY0hQOGXPL2I"
+    ```
+
+    Request will be accepted and received **200 OK** response:
+    ```
+    HTTP/1.1 200 OK
+    Server: nginx/1.29.3
+    Date: Thu, 05 Mar 2026 15:35:01 GMT
+    Content-Type: text/plain
+    Content-Length: 162
+    Connection: keep-alive
+    Expires: Thu, 05 Mar 2026 15:35:00 GMT
+    Cache-Control: no-cache
+    Set-Cookie: BIGipServer~kubernetes~Shared~svc_nginx_ingress_npl_443_nginx_ingress_cafe_f5demo_io=117506314.19182.0000; path=/; Httponly; Secure
+
+    Server address: 192.168.2.20:8080
+    Server name: webapp-7b7dfbff54-fx6w6
+    Date: 05/Mar/2026:15:35:01 +0000
+    URI: /webapp
+    Request ID: f88b2c66308ed80fea5d920309ea1410
+    ```
+    </br>
