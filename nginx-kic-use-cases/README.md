@@ -1,4 +1,3 @@
-# **UNDER CONSTRUCTION !!!**
 # NGINX Plus Ingress Controller Use Cases
 
 We are going to demonstrate several use cases for Nginx Plus KIC & F5 Container Ingress Service, including:
@@ -133,6 +132,17 @@ All use cases was copied from [this repo](https://github.com/f5devcentral/NGINX-
 
 
 ## Testing the Use Cases
+### Inter namespace routing
+In Kubernetes, Inter-namespace routing is a common architecture where a shared Ingress Controller (the "front door") resides in one namespace, but the actual applications (the "tenants") live in others.
+
+Even though the Ingress Controller and your Service are in different namespaces, they communicate seamlessly because Kubernetes Networking is flat—meaning every Pod can reach every Service across the entire cluster by default.
+
+From the **ns-and-apps-cafe.yaml** manifest file, it will create new namespace **_apps-cafe_**, then deploy several service on this new namespace. Our Nginx Plus KIC will stay on namespace **_nginx-ingress_**, but it will be able to discover service on the different namespace, which apps-cafe on this case, and routed traffic there. 
+
+The Nginx Plus KIC VirtualServer should be created inside **_apps-cafe_** namespace, while the F5 CIS VirtualServer will be created inside **_nginx-ingress_** namespace. When all object created and successfully deployed, then the inter namespace routing will work as expected.
+
+In our lab, one of the key on how it is possible is because the RBAC that we deployed during Nginx Plus KIC installation, that will permit Nginx Plus KIC to work across all namespaces in the cluster.
+
 ### Advanced Routing Scenario
 Basically all scenario here are doing advanced routing, where Nginx Plus KIC will do routing in various conditions.
 1. When requesting to URI /tea with method POST, it will routed to service _tea-post_
