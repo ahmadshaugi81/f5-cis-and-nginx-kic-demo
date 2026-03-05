@@ -9,11 +9,15 @@ We are going to demonstrate several use cases for Nginx Plus KIC & F5 Container 
 - Traffic splitting (weight)
 - Rate limiting
 - Log integration with Prometheus & Grafana - next development
+</br>
 
 ## References
+
 All use cases was copied from [this repo](https://github.com/f5devcentral/NGINX-Ingress-Controller-Lab/tree/main/labs) with some adjustment.
+</br>
 
 ## Configuration Steps
+
 1. Preconfigured iRules on F5 BIG-IP to pass SNI flag to Nginx Plus KIC
 
     *Why it is needed?* _BIG-IP is not by default adding SNI extension on server side ([check this as reference](https://my.f5.com/manage/s/article/K000157250#:~:text=Cause,-The%20server%20SSL)). To resolve that refer this [KB about injecting SNI on server-side from BIG-IP](https://my.f5.com/manage/s/article/K000160184), and refer to this [KB about why Nginx CIS need SNI flag enabled](https://my.f5.com/s/article/K000140717)_
