@@ -13,7 +13,7 @@ We are going to demonstrate several use cases for Nginx Plus Ingress Controller 
 
 ## References
 
-All use cases was copied from [this repo](https://github.com/f5devcentral/NGINX-Ingress-Controller-Lab/tree/main/labs) with some adjustment.
+All use cases was copied from [f5devcentral repo](https://github.com/f5devcentral/NGINX-Ingress-Controller-Lab/tree/main/labs) with some adjustment.
 </br>
 
 
