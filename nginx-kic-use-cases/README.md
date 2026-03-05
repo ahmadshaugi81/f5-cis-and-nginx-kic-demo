@@ -244,3 +244,21 @@ This use case shows how to enforce JWT authentication at the Nginx Plus KIC leve
     Request ID: f88b2c66308ed80fea5d920309ea1410
     ```
     </br>
+
+### Traffic Splitting Scenario
+This use case configures traffic splitting for a sample application with two services: coffee-v1-svc and coffee-v2-svc 70% of the coffee application traffic is sent to coffee-v1-svc the remaining 30% to coffee-v2-svc. To simulate a series of 100 requests, test access using the script provided. It sends 100 requests and shows the traffic split ratio
+
+```
+./test.sh
+```
+
+Output should be similar to:
+```
+Summary of responses:
+Coffee v1: 70 times
+Coffee v2: 30 times
+```
+</br>
+
+### Rate Limiting Scenario
+This use case applies rate limiting for an application exposed through Nginx Plus KIC.
