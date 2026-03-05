@@ -61,7 +61,7 @@ All use cases was copied from [this repo](https://github.com/f5devcentral/NGINX-
     kubectl apply -f nic-vs-cafe-adv-routing.yaml
     ```
 
-5. Create **test.sh** file on server that will simulate request from client on **traffic splitting** scenario. This shell script will generate traffic to _https://cafe.f5demo.io/split_, then it will print the results. Make sure that cafe.f5demo.io was can be reached from clients simulator (ex: creating /etc/hosts configuration), or modify the script as needed.
+5. Create **test.sh** file on server that will simulate request from client on **traffic splitting** scenario. This shell script will generate traffic to _https://cafe.f5demo.io/split_, then it will print the results. Make sure that cafe.f5demo.io can be reached from client simulator server (ex: creating /etc/hosts configuration), or modify the script as needed.
 
     ```
     #!/bin/bash
@@ -90,7 +90,7 @@ All use cases was copied from [this repo](https://github.com/f5devcentral/NGINX-
     eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6IjAwMDEifQ.eyJuYW1lIjoiUXVvdGF0aW9uIFN5c3RlbSIsInN1YiI6InF1b3RlcyIsImlzcyI6Ik15IEFQSSBHYXRld2F5In0.ggVOHYnVFB8GVPE-VOIo3jD71gTkLffAY0hQOGXPL2I
     ```
 
-7. Create **rate-limit-test.sh** file on server that will simulate request from client on **rate limit** scenario. This shell script will generate traffic to _https://cafe.f5demo.io/tea_, with various time interval between 0.25, 0.5, 0.75, and 1 second, then it will print the total number of response code received, whether it is 200 or 429 (rate limit). Make sure that cafe.f5demo.io was can be reached from clients simulator (ex: creating /etc/hosts configuration), or modify the script as needed.
+7. Create **rate-limit-test.sh** file on server that will simulate request from client on **rate limit** scenario. This shell script will generate traffic to _https://cafe.f5demo.io/tea_, with various time interval between 0.25, 0.5, 0.75, and 1 second, then it will print the total number of response code received, whether it is 200 or 429 (rate limited). Make sure that cafe.f5demo.io can be reached from client simulator server (ex: creating /etc/hosts configuration), or modify the script as needed.
 
     ```
     #!/bin/bash
