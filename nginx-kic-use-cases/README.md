@@ -143,7 +143,7 @@ From the **ns-and-apps-cafe.yaml** manifest file, it will create new namespace *
 
 The Nginx Plus Ingress Controller VirtualServer should be created inside **_apps-cafe_** namespace, while the F5 CIS VirtualServer will be created inside **_nginx-ingress_** namespace. When all object created and successfully deployed, then the inter namespace routing will work as expected.
 
-In our lab, one of the key on how it is possible is because the RBAC that we deployed during Nginx Plus Ingress Controller installation, that will permit Nginx Plus Ingress Controller to work across all namespaces in the cluster.
+In our lab, one of the key on how it is possible is because the RBAC that we deployed during Nginx Plus Ingress Controller installation ([nplus-kic-install/manifest/rbac.yaml](https://github.com/ahmadshaugi81/f5-cis-and-nginx-kic-demo/blob/main/nplus-kic-install/manifest/rbac.yaml)). It will permit Nginx Plus Ingress Controller to work across all namespaces in the cluster.
 </br>
 
 
