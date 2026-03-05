@@ -5,9 +5,9 @@ We are going to demonstrate several use cases for Nginx Plus Ingress Controller 
 - Basic & advanced routing
 - TLS termination on BIG-IP and Nginx Plus Ingress Controller
 - Authentication with JWT
-- Traffic splitting (weight)
+- Traffic splitting (weighting)
 - Rate limiting
-- Log integration with Prometheus & Grafana - next development
+- Log integration with Prometheus & Grafana - _under development_
 </br>
 
 ## References
