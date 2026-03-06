@@ -1,7 +1,7 @@
 # NGINX Plus Ingress Controller Use Cases
 
 We are going to demonstrate several use cases for Nginx Plus Ingress Controller & F5 Container Ingress Service, including:
-- Inter namespace routing
+- Cross-namespace routing
 - Basic & advanced routing
 - TLS termination on BIG-IP and Nginx Plus Ingress Controller
 - Authentication with JWT
@@ -40,7 +40,7 @@ All use cases was copied from [f5devcentral repo](https://github.com/f5devcentra
     }
     ```
 
-2. Create new namespace and deploy sample apps. It will show how we can do inter namespace routing kubernetes cluster
+2. Create new namespace and deploy sample apps. It will show how we can do Cross-namespace routing kubernetes cluster
     ```
     kubectl apply -f /sample-apps/ns-and-apps-cafe.yaml
     ```
@@ -134,14 +134,14 @@ All use cases was copied from [f5devcentral repo](https://github.com/f5devcentra
 
 
 ## Testing the Use Cases
-### Inter namespace routing
+### Cross-namespace routing
 In Kubernetes, Inter-namespace routing is a common architecture where a shared Ingress Controller (the "front door") resides in one namespace, but the actual applications (the "tenants") live in others.
 
 Even though the Ingress Controller and your Service are in different namespaces, they communicate seamlessly because Kubernetes Networking is flat—meaning every Pod can reach every Service across the entire cluster by default.
 
 From the **ns-and-apps-cafe.yaml** manifest file, it will create new namespace **_apps-cafe_**, then deploy several service on this new namespace. Our Nginx Plus Ingress Controller will stay on namespace **_nginx-ingress_**, but it will be able to discover service on the different namespace, which apps-cafe on this case, and routed traffic there. 
 
-The Nginx Plus Ingress Controller VirtualServer should be created inside **_apps-cafe_** namespace, while the F5 CIS VirtualServer will be created inside **_nginx-ingress_** namespace. When all object created and successfully deployed, then the inter namespace routing will work as expected.
+The Nginx Plus Ingress Controller VirtualServer should be created inside **_apps-cafe_** namespace, while the F5 CIS VirtualServer will be created inside **_nginx-ingress_** namespace. When all object created and successfully deployed, then the Cross-namespace routing will work as expected.
 
 In our lab, one of the key on how it is possible is because the RBAC that we deployed during Nginx Plus Ingress Controller installation ([nplus-kic-install/manifest/rbac.yaml](https://github.com/ahmadshaugi81/f5-cis-and-nginx-kic-demo/blob/main/nplus-kic-install/manifest/rbac.yaml)). It will permit Nginx Plus Ingress Controller to work across all namespaces in the cluster.
 </br>
