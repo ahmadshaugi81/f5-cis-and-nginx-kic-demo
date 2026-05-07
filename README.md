@@ -1,4 +1,4 @@
-# UNDER CONSTRUCTION !!!
+# UNDER CONSTRUCTION !!!!
 
 1. Sample Apps Installation
 2. Nginx Plus Ingress Controller Installation
