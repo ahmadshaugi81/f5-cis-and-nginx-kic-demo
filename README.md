@@ -1,5 +1,6 @@
 # UNDER CONSTRUCTION !!!!
 
-1. Sample Apps Installation
-2. Nginx Plus Ingress Controller Installation
-3. F5 Container Ingress Service Installation
+1. Nginx Plus Ingress Controller Installation
+2. F5 Container Ingress Service Installation
+3. Sample Apps Installation
+4. Expose service through BIG-IP & Nginc KIC
