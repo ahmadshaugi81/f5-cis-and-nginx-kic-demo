@@ -46,7 +46,7 @@
     kubectl apply -f nplus-kic-install/ingress-class.yaml
     ```
 
-8. Install CRDs from single YAML (without NAP). Update the **_version_** as needed. This is to register the Custom Resource Definitions, which add new resource kinds like VirtualServer and Policy that the controller uses instead of plain Ingress objects:
+8. Install CRDs from single YAML (without F5 WAF for NGINX). Update the **_version_** as needed. This is to register the Custom Resource Definitions, which add new resource kinds like VirtualServer and Policy that the controller uses instead of plain Ingress objects:
     ```
     kubectl apply -f https://raw.githubusercontent.com/nginx/kubernetes-ingress/v5.5.1/deploy/crds.yaml
     ```
