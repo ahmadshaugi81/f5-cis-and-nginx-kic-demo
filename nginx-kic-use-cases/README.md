@@ -7,8 +7,7 @@ We are going to demonstrate several use cases for Nginx Plus Ingress Controller 
 - Authentication with JWT
 - Traffic splitting (weighting)
 - Rate limiting
-- Log integration with Prometheus & Grafana - _under development_
-- TCP optimization on F5 BIG-IP - _under development_
+- k8s cluster expansion scaling - _under construction_
 </br>
 
 ## References
