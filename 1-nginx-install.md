@@ -3,6 +3,7 @@
 ## Installation Steps
 
 **Notes:** _Before begin, check the latest version of NGINX Ingress on this [link](https://github.com/nginx/kubernetes-ingress/releases)_ and make sure already clone this repository and has been inside the working folder:
+
     ```
     git clone https://github.com/ahmadshaugi81/f5-cis-and-nginx-kic-demo.git
     cd f5-cis-and-nginx-kic-demo
@@ -47,7 +48,7 @@
 
 8. Install CRDs from single YAML (without NAP). Update the **_version_** as needed. This is to register the Custom Resource Definitions, which add new resource kinds like VirtualServer and Policy that the controller uses instead of plain Ingress objects:
     ```
-    kubectl apply -f https://raw.githubusercontent.com/nginx/kubernetes-ingress/v5.3.1/deploy/crds.yaml
+    kubectl apply -f https://raw.githubusercontent.com/nginx/kubernetes-ingress/v5.5.1/deploy/crds.yaml
     ```
 
 9. Deploy NGINX Ingress Controller with deployment. Choose this method for the flexibility to dynamically change the number of NGINX Ingress Controller replicas. This is to create the Deployment, which runs the actual NGINX Plus Ingress Controller pods using the namespace, RBAC, secrets, and ConfigMaps prepared in the previous steps:
