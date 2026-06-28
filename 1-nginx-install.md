@@ -19,11 +19,9 @@
     kubectl apply -f nplus-kic-install/rbac.yaml
     ```
 
-3. Create or upload Nginx Plus JWT license file, certificate, and key files. Paste the value on each file creation. This is to create the JWT license file, which authorizes use of NGINX Plus, and the certificate/key pair, which are used to pull the image and validate the license:
+3. Create or upload the Nginx Plus JWT license file. Paste the value on file creation. This is to create the JWT license file, which authorizes use of NGINX Plus and is used to pull the image and activate the license:
     ```
     vi nplus-kic-install/nginx-eval.jwt
-    vi nplus-kic-install/nginx-eval.crt
-    vi nplus-kic-install/nginx-eval.key
     ```
 
 4. Create Kubernetes secret to pull images from NGINX private registry. This is to create a docker-registry Secret, which stores the credentials (the JWT as username) needed to authenticate and pull the NGINX Plus image:
