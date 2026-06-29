@@ -1,7 +1,3 @@
-# **UNDER CONSTRUCTION !!!**
-
-References: https://clouddocs.f5.com/containers/latest/userguide/kubernetes/#installing-cis-manually
-
 # F5 Container Ingress Service (CIS) Installation
 
 ## Pre-requisites Before Installation
@@ -25,6 +21,7 @@ There are several steps we need to do directly on F5 BIG-IP instance before movi
     To create new BIG-IP user, go to **System ›› Users ›› User List**, and click **Create**. Give Administrator role as it is mandatory for AS3. For this lab make username **f5-cis** and password **P@ssw0rdF5C!S!**
 
     ![Create User](assets/create-user.png)
+</br>
 
 ## Step-by-step of F5 CIS Installation
 1. Download the CA/BIG IP certificate and use it with CIS controller.
@@ -74,3 +71,9 @@ kubectl -n <target-namespace> create -f cis-vs-creation.yaml
 ```
 
 Refer to the official F5 CIS documentation for other [VirtualServer](https://clouddocs.f5.com/containers/latest/userguide/crd/virtualserver.html) components.
+
+</br>
+
+## References
+
+[F5 Container Ingress Service Installation](https://clouddocs.f5.com/containers/latest/userguide/kubernetes/#installing-cis-manually)
