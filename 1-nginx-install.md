@@ -4,10 +4,10 @@
 
 **Notes:** _Before begin, check the latest version of NGINX Ingress on this [link](https://github.com/nginx/kubernetes-ingress/releases)_ and make sure already clone this repository and has been inside the working folder:
 
-    ```
-    git clone https://github.com/ahmadshaugi81/f5-cis-and-nginx-kic-demo.git
-    cd f5-cis-and-nginx-kic-demo
-    ```
+```
+git clone https://github.com/ahmadshaugi81/f5-cis-and-nginx-kic-demo.git
+cd f5-cis-and-nginx-kic-demo
+```
 
 </br>
 
