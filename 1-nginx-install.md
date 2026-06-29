@@ -8,6 +8,7 @@
     git clone https://github.com/ahmadshaugi81/f5-cis-and-nginx-kic-demo.git
     cd f5-cis-and-nginx-kic-demo
     ```
+
 </br>
 
 1. Create a namespace and a service account. This is to create a Namespace, which is the isolated workspace for all NGINX Plus KIC resources, and a Service Account, which is the identity the controller pod uses to talk to the Kubernetes API:
